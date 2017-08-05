@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>I Felt It!</title>
+</head>
+<body>
+	<!-- Code from Facebook - Loads Facebook SDK - this needs to go at the top of the body tag. 
+			 The following snippet of code will give the basic version of the SDK where the options are set to their most common defaults.  -->
+	<script>
+  	window.fbAsyncInit = function() {
+    	FB.init({
+      	appId      : '159013001329609',
+	      xfbml      : true,
+  	    version    : 'v2.10'
+    	});
+	    FB.AppEvents.logPageView();
+  	};
+
+  	(function(d, s, id){
+    	var js, fjs = d.getElementsByTagName(s)[0];
+    	if (d.getElementById(id)) {return;}
+	    js = d.createElement(s); js.id = id;
+  	  js.src = "//connect.facebook.net/en_US/sdk.js";
+    	fjs.parentNode.insertBefore(js, fjs);
+  	}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+
+</body>
+</html>
