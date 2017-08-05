@@ -1,0 +1,42 @@
+<!doctype html>
+
+<!---The followin is a temporary html markup used to test that map.js is functional. Feel free to NOT merge this index.html when putting codes together -->
+
+<html>
+	
+	<head>
+
+		<Title>Map Test</Title>
+		<script src="http://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+
+	</head>
+
+	 <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>	
+
+	<body>
+		
+		<div id="map"></div>
+
+		<script src="assets/javascript/map.js"></script>
+
+		 <script async defer
+    src="https://maps.googleapis.com/maps/api/js?AIzaSyCYG_rqJdj6LCL_MSarbLoyP7iSJ34w1L8&callback=initMap"></script>
+
+	</body>
+
+</html>
