@@ -1,42 +1,38 @@
-<!doctype html>
-
-<!---The followin is a temporary html markup used to test that map.js is functional. Feel free to NOT merge this index.html when putting codes together -->
-
+<!DOCTYPE html>
 <html>
-	
-	<head>
+<head>
+	<title>I Felt It!</title>
+</head>
+<body>
+	<!-- Code from Facebook - Loads Facebook SDK - this needs to go at the top of the body tag. 
+			 The following snippet of code will give the basic version of the SDK where the options are set to their most common defaults.  -->
+	<div id="fb-root"></div>
+  <script>
+  	window.fbAsyncInit = function() {
+    	FB.init({
+      	appId      : '159013001329609',
+	      xfbml      : true,
+  	    version    : 'v2.10'
+    	});
+	    FB.AppEvents.logPageView();
+  	};
 
-		<Title>Map Test</Title>
-		<script src="http://code.jquery.com/jquery-3.2.1.js"
-  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-  crossorigin="anonymous"></script>
-  		<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+  	(function(d, s, id){
+    	var js, fjs = d.getElementsByTagName(s)[0];
+    	if (d.getElementById(id)) {return;}
+	    js = d.createElement(s); js.id = id;
+  	  js.src = "//connect.facebook.net/en_US/sdk.js";
+    	fjs.parentNode.insertBefore(js, fjs);
+  	}(document, 'script', 'facebook-jssdk'));
+	</script>
 
-	</head>
+  <!-- Facebook Log-in Button -->
+  <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div>
+  <div id="map"></div>
 
-	 <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>	
+	<script src="assets/javascript/map.js"></script>
 
-	<body>
-		
-		<div id="map"></div>
-
-		<script src="assets/javascript/map.js"></script>
-
-		 <script async defer
+	<script async defer
     src="https://maps.googleapis.com/maps/api/js?AIzaSyCYG_rqJdj6LCL_MSarbLoyP7iSJ34w1L8&callback=initMap"></script>
-
-	</body>
-
+</body>
 </html>
