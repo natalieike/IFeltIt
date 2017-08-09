@@ -19,42 +19,50 @@
 			 The following snippet of code will give the basic version of the SDK where the options are set to their most common defaults.  -->
 	<div id="fb-root"></div>
   <script>
-  	window.fbAsyncInit = function() {
-    	FB.init({
-      	appId      : '159013001329609',
-	      xfbml      : true,
-  	    version    : 'v2.10'
-    	});
-	    FB.AppEvents.logPageView();
-  	};
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=159013001329609";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
 
-  	(function(d, s, id){
-    	var js, fjs = d.getElementsByTagName(s)[0];
-    	if (d.getElementById(id)) {return;}
-	    js = d.createElement(s); js.id = id;
-  	  js.src = "//connect.facebook.net/en_US/sdk.js";
-    	fjs.parentNode.insertBefore(js, fjs);
-  	}(document, 'script', 'facebook-jssdk'));
-	</script>
-    
+
       <!-- SIDE NAV -->
-      <ul id="nav-mobile" class="collection side-nav fixed grey darken-4 z">
-      <!-- <a href="#!" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a> -->
+      <ul id="slide-out" class="collection side-nav fixed grey darken-4 z">
+     
         <!-- LOGO -->
         <div id="logo"><a href="#" class="brand-logo"><img id="logo-img" src="assets/images/logo-3.png"></a></div>
+        <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div>
+
+        <div id="status"></div>
 
         <!-- LIST -->
         <p id="most-recent-eq">Most Recent Earthquakes</p>
 
         <div id="list-wrapper">
-          
+
         </div> <!-- ./list-wrapper -->
+        
+        <!-- PAGINATION -->
+         <ul class="pagination">
+          <li class="disabled"><a href="#!"><i class=" material-icons">chevron_left</i></a></li>
+          <li class="active"><a href="#">1</a></li>
+          <li class=""><a href="#">2</a></li>
+          <li class=""><a ref="#">3</a></li>
+          <li class=""><a href="#">4</a></li>
+          <li class=""><a href="#">5</a></li>
+          <li class=""><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+        </ul>
 
       </ul>
+
+      <a href="#" data-activates="slide-out" class="button-collapse"><i class="ham-menu medium material-icons">menu</i></a>
       
       <!-- INFO CARD -->
       <div class="row info-card">
-        <div class="col s3 offset-s9">
+        <div class="col s12 m5 offset-m7 l3 offset-l9">
           <div class="card white">
             <div class="card-content">
               <!-- TITLE -->
@@ -69,12 +77,15 @@
             </div>
             <!-- ACTION -->
             <div class="card-action">
-              <button class="btn yellow darken-1"><b>I Felt It!</b></button>
+              <button class="btn yellow darken-1 waves-effect"><b>I Felt It!</b></button>
             </div>
-
           </div>
         </div>
       </div> <!-- ./info-card -->
+      
+      <div id="map"></div>
+  
+
 
   <!--Import jQuery and materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -83,23 +94,14 @@
   <script type="text/javascript">
   
 
-  // $( document ).ready(function() {
-  //   $('.info-card').hide();
-
-  //   $('.collection-item').click(function(){
-  //     // var time = $
-  //     $('.info-card').show();
-  //   });
-  // });
   </script>
-  <!-- Facebook Log-in Button -->
-  <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div>
-  <div id="map"></div>
 
 	<script src="assets/javascript/map.js"></script>
+
   <script src="assets/javascript/usgs.js"></script>
+  <script src="assets/javascript/fbAuthentication.js"></script>
 
 	<script async defer
-    src="https://maps.googleapis.com/maps/api/js?AIzaSyCYG_rqJdj6LCL_MSarbLoyP7iSJ34w1L8&callback=initMap"></script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYG_rqJdj6LCL_MSarbLoyP7iSJ34w1L8&callback=initMap"></script>
 </body>
 </html>
