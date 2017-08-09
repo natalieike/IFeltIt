@@ -63,24 +63,54 @@
   color: gray;
 }
 /*PAGINAITON*/
+.pagination{
+  margin-left: 6%;
+}
+
 .pagination li a{
   color: #fff;
+  padding: 10px;
 }
 
 .pagination li a:hover{
   color: #fdd835;
 }
 
-.side-nav li>a>i.material-icons
+.side-nav li>a>i.material-icons{
   color: #fff;
+  margin: 0;
 }
 
-.chevron:hover{
+.side-nav li>a>i.material-icons:hover{
   color: #fdd835;
 }
 
+<<<<<<< HEAD
+
+/*INFO CARD*/
+.info-card{
+position: ;
+}
+
+/*MAP*/
+#map{
+  height: 100%;
+}
+
+html, body{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+};
+
+
+
+
+
+=======
 .fb-login-button{
   height: 30px;
   width: 100px;
 }
+>>>>>>> 9972cc0cd92c72f57ff4f77899da0d91fe718265
 
