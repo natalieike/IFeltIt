@@ -15,7 +15,8 @@
 <body>
 	<!-- Code from Facebook - Loads Facebook SDK - this needs to go at the top of the body tag. 
 			 The following snippet of code will give the basic version of the SDK where the options are set to their most common defaults.  -->
-	<script>
+	<div id="fb-root"></div>
+  <script>
   	window.fbAsyncInit = function() {
     	FB.init({
       	appId      : '159013001329609',
@@ -33,7 +34,6 @@
     	fjs.parentNode.insertBefore(js, fjs);
   	}(document, 'script', 'facebook-jssdk'));
 	</script>
-
     
       <!-- SIDE NAV -->
       <ul id="nav-mobile" class="collection side-nav fixed grey darken-4 z">
@@ -137,5 +137,13 @@
     });
   });
   </script>
+  <!-- Facebook Log-in Button -->
+  <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div>
+  <div id="map"></div>
+
+	<script src="assets/javascript/map.js"></script>
+
+	<script async defer
+    src="https://maps.googleapis.com/maps/api/js?AIzaSyCYG_rqJdj6LCL_MSarbLoyP7iSJ34w1L8&callback=initMap"></script>
 </body>
 </html>
