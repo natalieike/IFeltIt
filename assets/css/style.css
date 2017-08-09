@@ -53,6 +53,7 @@
   margin-top: 2%;
   margin-left: 2%;
   color: #212121;
+  z-index: 100;
 }
 
 .ham-menu:hover{
@@ -85,11 +86,9 @@
   color: #fdd835;
 }
 
-<<<<<<< HEAD
-
 /*INFO CARD*/
 .info-card{
-position: ;
+
 }
 
 /*MAP*/
@@ -103,14 +102,9 @@ html, body{
   padding: 0;
 };
 
-
-
-
-
-=======
 .fb-login-button{
   height: 30px;
   width: 100px;
-}
->>>>>>> 9972cc0cd92c72f57ff4f77899da0d91fe718265
+};
+
 
