@@ -63,24 +63,38 @@
   color: gray;
 }
 /*PAGINAITON*/
+.pagination{
+  margin-left: 6%;
+}
+
 .pagination li a{
   color: #fff;
+  padding: 10px;
 }
 
 .pagination li a:hover{
   color: #fdd835;
 }
 
-.side-nav li>a>i.material-icons
+.side-nav li>a>i.material-icons{
   color: #fff;
+  margin: 0;
 }
 
-.chevron:hover{
+.side-nav li>a>i.material-icons:hover{
   color: #fdd835;
 }
 
 
 /*INFO CARD*/
+.info-card{
+
+}
+
+/*MAP*/
+#map{
+  height: 100%;
+}
 
 
 
