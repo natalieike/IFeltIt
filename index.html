@@ -25,23 +25,15 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   </script>
-  <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
-  <!--
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
--->
 
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
-
-<div id="status">
-</div>
       <!-- SIDE NAV -->
       <ul id="slide-out" class="collection side-nav fixed grey darken-4 z">
      
         <!-- LOGO -->
         <div id="logo"><a href="#" class="brand-logo"><img id="logo-img" src="assets/images/logo-3.png"></a></div>
+        <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
+
+        <div id="status"></div>
 
         <!-- LIST -->
         <p id="most-recent-eq">Most Recent Earthquakes</p>
@@ -158,6 +150,6 @@
   <script src="assets/javascript/fbAuthentication.js"></script>
 
 	<script async defer
-    src="https://maps.googleapis.com/maps/api/js?AIzaSyCYG_rqJdj6LCL_MSarbLoyP7iSJ34w1L8&callback=initMap"></script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYG_rqJdj6LCL_MSarbLoyP7iSJ34w1L8&callback=initMap"></script>
 </body>
 </html>

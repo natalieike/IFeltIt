@@ -79,11 +79,8 @@
   color: #fdd835;
 }
 
-
-/*INFO CARD*/
-
-
-
-
-
+.fb-login-button{
+  height: 30px;
+  width: 100px;
+}
 
