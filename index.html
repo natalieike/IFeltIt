@@ -36,8 +36,8 @@
 
     
       <!-- SIDE NAV -->
-      <ul id="nav-mobile" class="collection side-nav fixed grey darken-4 z">
-      <!-- <a href="#!" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a> -->
+      <ul id="slide-out" class="collection side-nav fixed grey darken-4 z">
+     
         <!-- LOGO -->
         <div id="logo"><a href="#" class="brand-logo"><img id="logo-img" src="assets/images/logo-3.png"></a></div>
 
@@ -50,7 +50,7 @@
             <div class="circle yellow darken-1 black-text center">
               <span class="magnitude">2.8</span>
             </div>
-            <p class="list-of-eq white-text">15km N of West Yellowstone, Montana</p>
+            <p class="list-of-eq">15km N of West Yellowstone, Montana</p>
             <p class="time-from-current">12 mins ago</p>
           </li>
 
@@ -58,7 +58,7 @@
             <div class="circle yellow darken-1 black-text center">
               <span class="magnitude">3.4</span>
             </div>
-            <p class="list-of-eq white-text">7km SE of Fairview, Oklahoma</p>
+            <p class="list-of-eq">7km SE of Fairview, Oklahoma</p>
             <p class="time-from-current">20 mins ago</p>
           </li>
 
@@ -66,7 +66,7 @@
             <div class="circle yellow darken-1 black-text center">
               <span class="magnitude">3.7</span>
             </div>
-            <p class="list-of-eq white-text">44km WSW of Trinidad, Colorado</p>
+            <p class="list-of-eq">44km WSW of Trinidad, Colorado</p>
             <p class="time-from-current">an hour ago</p>
           </li>
 
@@ -74,7 +74,7 @@
             <div class="circle yellow darken-1 black-text center">
               <span class="magnitude">5.8</span>
             </div>
-            <p class="list-of-eq white-text">63km NE of Cape Yakataga, Alaska</p>
+            <p class="list-of-eq">63km NE of Cape Yakataga, Alaska</p>
             <p class="time-from-current">1 day ago</p>
           </li>
 
@@ -82,7 +82,7 @@
             <div class="circle yellow darken-1 black-text center">
               <span class="magnitude">4.5</span>
             </div>
-            <p class="list-of-eq white-text">71km WNW of Skagway, Alaska</p>
+            <p class="list-of-eq">71km WNW of Skagway, Alaska</p>
             <p class="time-from-current">4 days ago</p>
           </li>
 
@@ -90,16 +90,29 @@
             <div class="circle yellow darken-1 black-text center">
               <span class="magnitude">3.6</span>
             </div>
-            <p class="list-of-eq white-text">7km SE of Fairview, Oklahoma</p>
+            <p class="list-of-eq">7km SE of Fairview, Oklahoma</p>
             <p class="time-from-current">Aug 6</p>
           </li>
         </div> <!-- ./list-wrapper -->
+        
+        <!-- PAGINATION -->
+         <ul class="pagination">
+          <li class="disabled"><a href="#!"><i class="chevron material-icons">chevron_left</i></a></li>
+          <li class="active"><a href="#">1</a></li>
+          <li class=""><a href="#">2</a></li>
+          <li class=""><a ref="#">3</a></li>
+          <li class=""><a href="#">4</a></li>
+          <li class=""><a href="#">5</a></li>
+          <li class=""><a href="#!"><i class="chevron material-icons">chevron_right</i></a></li>
+        </ul>
 
       </ul>
+
+      <a href="#" data-activates="slide-out" class="button-collapse"><i class="ham-menu medium material-icons">menu</i></a>
       
       <!-- INFO CARD -->
       <div class="row info-card">
-        <div class="col s3 offset-s9">
+        <div class="col s12 m5 offset-m7 l3 offset-l9">
           <div class="card white">
             <div class="card-content">
               <!-- TITLE -->
@@ -114,9 +127,8 @@
             </div>
             <!-- ACTION -->
             <div class="card-action">
-              <button class="btn yellow darken-1"><b>I Felt It!</b></button>
+              <button class="btn yellow darken-1 waves-effect"><b>I Felt It!</b></button>
             </div>
-
           </div>
         </div>
       </div> <!-- ./info-card -->
@@ -129,10 +141,10 @@
   
 
   $( document ).ready(function() {
+    $(".button-collapse").sideNav();
     $('.info-card').hide();
 
     $('.collection-item').click(function(){
-      var time = $
       $('.info-card').show();
     });
   });
