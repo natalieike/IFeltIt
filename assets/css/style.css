@@ -114,3 +114,12 @@ html, body{
 }
 >>>>>>> 9972cc0cd92c72f57ff4f77899da0d91fe718265
 
+#map {
+        height: 100%;
+      }
+      
+html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
