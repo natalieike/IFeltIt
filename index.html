@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <!--Let browser know website is optimized for mobile-->
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title>I Felt It!</title>
 
@@ -11,6 +12,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css">
   <!--Import style.css-->
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
 </head>
 <body>
 	<!-- Code from Facebook - Loads Facebook SDK - this needs to go at the top of the body tag. 
@@ -41,53 +43,6 @@
 
         <div id="list-wrapper">
 
-          <li class="collection-item avatar grey darken-4">
-            <div class="circle yellow darken-1 black-text center">
-              <span class="magnitude">2.8</span>
-            </div>
-            <p class="list-of-eq">15km N of West Yellowstone, Montana</p>
-            <p class="time-from-current">12 mins ago</p>
-          </li>
-
-          <li class="collection-item avatar grey darken-4">
-            <div class="circle yellow darken-1 black-text center">
-              <span class="magnitude">3.4</span>
-            </div>
-            <p class="list-of-eq">7km SE of Fairview, Oklahoma</p>
-            <p class="time-from-current">20 mins ago</p>
-          </li>
-
-          <li class="collection-item avatar grey darken-4">
-            <div class="circle yellow darken-1 black-text center">
-              <span class="magnitude">3.7</span>
-            </div>
-            <p class="list-of-eq">44km WSW of Trinidad, Colorado</p>
-            <p class="time-from-current">an hour ago</p>
-          </li>
-
-          <li class="collection-item avatar grey darken-4">
-            <div class="circle yellow darken-1 black-text center">
-              <span class="magnitude">5.8</span>
-            </div>
-            <p class="list-of-eq">63km NE of Cape Yakataga, Alaska</p>
-            <p class="time-from-current">1 day ago</p>
-          </li>
-
-          <li class="collection-item avatar grey darken-4">
-            <div class="circle yellow darken-1 black-text center">
-              <span class="magnitude">4.5</span>
-            </div>
-            <p class="list-of-eq">71km WNW of Skagway, Alaska</p>
-            <p class="time-from-current">4 days ago</p>
-          </li>
-
-          <li class="collection-item avatar grey darken-4">
-            <div class="circle yellow darken-1 black-text center">
-              <span class="magnitude">3.6</span>
-            </div>
-            <p class="list-of-eq">7km SE of Fairview, Oklahoma</p>
-            <p class="time-from-current">Aug 6</p>
-          </li>
         </div> <!-- ./list-wrapper -->
         
         <!-- PAGINATION -->
@@ -111,14 +66,14 @@
           <div class="card white">
             <div class="card-content">
               <!-- TITLE -->
-              <span class="card-title">
+              <span class="card-title" id="cardTitle">
                 <b>7km SE of Fairview, Oklahoma</b>
               </span>
               <!-- DETAIL INFORMATION -->
-              <p class="eq-info">Time: <span id="eq-time">2017-08-06 11:00:59 (UTC)</span></p>
-              <p class="eq-info">Location: <span id="eq-location">60.396°N 141.486°W</span></p>
-              <p class="eq-info">Magitude: <span id="eq-magitude">3.7 mw</span></p>
-              <p class="eq-info">Depth: <span id="eq-depth">7.6 km</span></p>
+              <p class="eq-info">Time: <span id="eq-time"></span></p>
+              <p class="eq-info">Location: <span id="eq-location"></span></p>
+              <p class="eq-info">Magitude: <span id="eq-magitude"></span></p>
+              <p class="eq-info">Depth: <span id="eq-depth"></span></p>
             </div>
             <!-- ACTION -->
             <div class="card-action">
@@ -139,17 +94,11 @@
   <script type="text/javascript">
   
 
-  $( document ).ready(function() {
-    $(".button-collapse").sideNav();
-    $('.info-card').hide();
-
-    $('.collection-item').click(function(){
-      $('.info-card').show();
-    });
-  });
   </script>
 
 	<script src="assets/javascript/map.js"></script>
+
+  <script src="assets/javascript/usgs.js"></script>
   <script src="assets/javascript/fbAuthentication.js"></script>
 
 	<script async defer
