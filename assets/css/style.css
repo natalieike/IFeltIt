@@ -52,5 +52,8 @@
   line-height: 33px;
 }
 
-
+.fb-login-button{
+  height: 30px;
+  width: 100px;
+}
 
