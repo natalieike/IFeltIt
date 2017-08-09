@@ -17,24 +17,26 @@
 			 The following snippet of code will give the basic version of the SDK where the options are set to their most common defaults.  -->
 	<div id="fb-root"></div>
   <script>
-  	window.fbAsyncInit = function() {
-    	FB.init({
-      	appId      : '159013001329609',
-	      xfbml      : true,
-  	    version    : 'v2.10'
-    	});
-	    FB.AppEvents.logPageView();
-  	};
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=159013001329609";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+  <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="true"></div>
+  <!--
+  Below we include the Login Button social plugin. This button uses
+  the JavaScript SDK to present a graphical Login button that triggers
+  the FB.login() function when clicked.
+-->
+<!--
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+</fb:login-button>
+-->
+<div id="status"></div>
 
-  	(function(d, s, id){
-    	var js, fjs = d.getElementsByTagName(s)[0];
-    	if (d.getElementById(id)) {return;}
-	    js = d.createElement(s); js.id = id;
-  	  js.src = "//connect.facebook.net/en_US/sdk.js";
-    	fjs.parentNode.insertBefore(js, fjs);
-  	}(document, 'script', 'facebook-jssdk'));
-	</script>
-    
       <!-- SIDE NAV -->
       <ul id="nav-mobile" class="collection side-nav fixed grey darken-4 z">
       <!-- <a href="#!" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a> -->
@@ -120,6 +122,8 @@
           </div>
         </div>
       </div> <!-- ./info-card -->
+  <div id="map"></div>
+</div>
 
   <!--Import jQuery and materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -137,11 +141,9 @@
     });
   });
   </script>
-  <!-- Facebook Log-in Button -->
-  <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div>
-  <div id="map"></div>
 
 	<script src="assets/javascript/map.js"></script>
+  <script src="assets/javascript/fbAuthentication.js"></script>
 
 	<script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYG_rqJdj6LCL_MSarbLoyP7iSJ34w1L8&callback=initMap"></script>
