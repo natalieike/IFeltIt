@@ -7,6 +7,7 @@
 
 .side-nav{
   width: 360px;
+  padding-bottom: 150px;
 }
 
 #list-wrapper{
@@ -15,24 +16,23 @@
 
 #most-recent-eq{
   font-weight: bold;
-  font-size: 13px;
+  font-size: 14px;
   color: #9e9e9e;
   margin-left: 5%;
   margin-top: 10%;
 }
 
 .list-of-eq{
-  font-weight: bold;
   color: white;
 }
 
 .time-from-current{
-  font-size: 12px;
+  font-size: 13px;
   color: #9e9e9e;
 }
 
 .circle{
-  font-size: 20px;
+  font-size: 16px;
   padding-top: 2.7%;
 }
 
@@ -63,9 +63,10 @@
 .list-of-eq:hover{
   color: gray;
 }
+
 /*PAGINAITON*/
 .pagination{
-  margin-left: 6%;
+  margin-left: 1%;
 }
 
 .pagination li a{
@@ -88,7 +89,26 @@
 
 /*INFO CARD*/
 .info-card{
+position: fixed;
+z-index: 100;
+top:30px;
+right:30px;
+width: 430px;
+}
 
+.close{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #bdbdbd;
+}
+
+.close:hover{
+ color: #212121; 
+}
+
+.card-title{
+  margin-right: 50px;
 }
 
 /*MAP*/
