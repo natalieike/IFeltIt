@@ -114,11 +114,12 @@ width: 430px;
 
 /*FB BUTTON*/
 .fb-login-button{
-  margin-top: 3%;
-  margin-left: 6%;
+  margin: 3% 0 15px 6%;
 }
+
 #status{
   margin-left: 6%;
+  color: #fff;
 }
 
 /*MAP*/
