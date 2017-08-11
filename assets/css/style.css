@@ -122,6 +122,11 @@ width: 430px;
   color: #fff;
 }
 
+#shareBtn{
+  background-color: #314681;
+  margin-left: 5px;
+}
+
 /*MAP*/
 #map{
   height: 100%;
