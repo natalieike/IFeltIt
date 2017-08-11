@@ -34,6 +34,8 @@
      
         <!-- LOGO -->
         <div id="logo"><a href="#" class="brand-logo"><img id="logo-img" src="assets/images/logo-3.png"></a></div>
+
+        <!-- FB LOGIN -->
         <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div>
 
         <div id="status"></div>
@@ -41,9 +43,7 @@
         <!-- LIST -->
         <p id="most-recent-eq">Most Recent Earthquakes</p>
 
-        <div id="list-wrapper">
-
-        </div> <!-- ./list-wrapper -->
+        <div id="list-wrapper"></div> 
         
         <!-- PAGINATION -->
          <ul class="pagination">
@@ -62,9 +62,10 @@
       
       <!-- INFO CARD -->
       <div class="row info-card">
-        <div class="col s12 m5 offset-m7 l3 offset-l9">
+        <div class="">
           <div class="card white">
             <div class="card-content">
+              <a href="#"><i class="close small material-icons">clear</i></a>
               <!-- TITLE -->
               <span class="card-title" id="cardTitle">
                 <b>7km SE of Fairview, Oklahoma</b>
@@ -77,7 +78,7 @@
             </div>
             <!-- ACTION -->
             <div class="card-action">
-              <button class="btn yellow darken-1 waves-effect"><b>I Felt It!</b></button>
+              <button class="btn yellow darken-1 waves-effect black-text"><b>I Felt It!</b></button>
             </div>
           </div>
         </div>
@@ -104,7 +105,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
 
   <script type="text/javascript">
-  
+      $(".button-collapse").sideNav();
+      $('.close').click(function(){
+        $('.info-card').hide();
+      })
 
   </script>
 
