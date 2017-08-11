@@ -109,6 +109,16 @@ width: 430px;
 
 .card-title{
   margin-right: 50px;
+  font-size: 10px;
+}
+
+/*FB BUTTON*/
+.fb-login-button{
+  margin-top: 3%;
+  margin-left: 6%;
+}
+#status{
+  margin-left: 6%;
 }
 
 /*MAP*/
