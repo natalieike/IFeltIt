@@ -81,7 +81,7 @@
             <div class="card-action">
               <button class="btn yellow darken-1 waves-effect black-text"><b>I Felt It!</b></button>
 
-              <div id="shareBtn" class="btn clearfix">Share</div>
+              <div id="shareBtn" class="btn clearfix waves-effect">Share</div>
             </div>
           </div>
         </div>
@@ -105,6 +105,7 @@
         FB.ui({
           method: 'share',
           display: 'popup',
+          href: 'https://natalieike.github.io/IFeltIt',
           quote: 'I Felt It!',
         }, function(response){});
       }
