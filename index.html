@@ -122,13 +122,8 @@
           FB.ui({
             method: 'share',
             href: 'https://natalieike.github.io/IFeltIt',
-            // quote: 'I Felt It!' + titleFB + ', Time: ' + timeFB + '<br> Location: ' + locationFB + '<br> Magitude: ' + magitudeFB + '<br> Depth: ' + depthFB,
-            quote: 'I Felt It!',
-            quote: titleFB,
-            quote: timeFB,
-            quote: locationFB,
-            quote: magitudeFB,
-            quote: depthFB,
+            quote: 'I Felt It!' + titleFB + ', ' + timeFB + ', ' + locationFB + ', ' + magitudeFB + ', ' + depthFB,
+            
           }, function(response){
           });
       }
