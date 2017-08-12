@@ -47,7 +47,7 @@
         <div id="list-wrapper"></div> 
         
         <!-- PAGINATION -->
-         <ul class="pagination">
+         <!-- <ul class="pagination">
           <li class="disabled"><a href="#!"><i class=" material-icons">chevron_left</i></a></li>
           <li class="active"><a href="#">1</a></li>
           <li class=""><a href="#">2</a></li>
@@ -55,7 +55,7 @@
           <li class=""><a href="#">4</a></li>
           <li class=""><a href="#">5</a></li>
           <li class=""><a href="#!"><i class="material-icons">chevron_right</i></a></li>
-        </ul>
+        </ul> -->
 
       </ul>
 
@@ -103,12 +103,21 @@
 
       document.getElementById('shareBtn').onclick = function() {
         FB.ui({
-          method: 'share',
+          method: 'feed',
           display: 'popup',
           href: 'https://natalieike.github.io/IFeltIt',
-          quote: 'I Felt It!',
-        }, function(response){});
+          quote: 'This is quote',
+          caption: 'This is caption',
+          name: 'This is name',
+          description: 'This is description',
+          message: 'This is message',
+
+        }, function(response){
+
+        });
       }
+
+
 
   </script>
 
