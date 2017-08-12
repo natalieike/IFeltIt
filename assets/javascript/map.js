@@ -1,13 +1,47 @@
 /* replace/merge the following with Jasmine's code */
 
 //sample query URL to test getting data onto map
-var queryUrl = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&offset=1"
+//var queryUrl = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&offset=1"
 
 //"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2017-08-01&endtime=2017-08-05&limit=10";
 
 //var to hold the returned ajax
-var eqArray = [];
+//var eqArray = [];
 
+//request geolocation
+function getGeolocation() {
+
+  if (navigator.geolocation != null) {
+  /* geolocation is available */
+    console.log("geo yes!");
+
+    var positionArray = [];
+
+    navigator.geolocation.getCurrentPosition(function(position){
+
+      var lat = position.coords.latitude;
+      var lng = position.coords.longitude;
+
+      console.log("lat is:" + position.coords.latitude);
+      console.log("lat is:" + position.coords.longitude);
+
+      positionArray.push(lat);
+      positionArray.push(lng);
+
+    });
+
+    return positionArray;
+
+  } else {
+  /* geolocation IS NOT available */
+  console.log("geo no!");
+  
+  }
+
+
+}
+
+var test = getGeolocation();
 
 //Stanley's code for google map
 var map;
@@ -23,142 +57,55 @@ function initMap() {
         
     });
 
-  function getCircle(magnitude, color) {
+
+
+};
+
+function createMarker(eqarray, holderarray) {
+
+      function getCircle(magnitude, color) {
         return {
           path: google.maps.SymbolPath.CIRCLE,
           fillColor: color,
           fillOpacity: .5,
-          scale: Math.pow(2, magnitude) * 2,
+          scale: Math.pow(2, magnitude) * 1.2,
           strokeColor: 'black',
           strokeWeight: .5
         };
       }
 
-      //got this ection of code from jasmine. 
-      var i,list,display;
-var currentTime=moment(new Date()).format("MM/DD/YYYY HH:mm");
-$.ajax({ 
-  url: "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&offset=1",
-  method: 'GET',
-}).done(function(response) {
-  console.log(response.features);
-  list=response.features;
-  //arr=response.features;
-  for(i=0;i<list.length;i++){
-    var t=moment(list[i].properties.time).format("MM/DD/YYYY HH:mm");
-    var duration = moment(currentTime).diff(t,'minutes');
-    console.log(t,currentTime,duration);
-    if((duration/60)<=1){
-      if(duration<2){
-      display=duration+" minute ago";
-    }
-    else{
-      display=duration+" minutes ago"
-    }
-    }
-    else if(((duration/60)/24 <= 1)){
-      display=Math.floor(duration/60);
-      if(display<2){
-        display=display+" hour ago";
-      }
-      else{
-        display=display+" hours ago"
-      }
-    }
-    else{
-      display=Math.floor((duration/60)/24);
-      if(display<2){
-        display=display+" day ago";
-      }
-      else{
-        display=display+" days ago";
-      }
-    }
-  //console.log(duration.asMinutes());
-
-    //var timeRemaining=moment.diff(list[i].properties.time)
-    $("#list-wrapper").append('<li class="collection-item avatar grey darken-4" data_info="'+(i+1)+'"><div class="circle yellow darken-1 black-text center"><span class="magnitude">'+list[i].properties.mag+'</span></div><p class="list-of-eq white-text">'+list[i].properties.title+'</p><p class="time-from-current">'+display+'</p></li>');
-  }
-
-      for (var i = 0; i < list.length; i++) {
+    for (var i = 0; i < eqarray.length; i++) {
     
-      var coords = list[i].geometry.coordinates;
+      var coords = eqarray[i].geometry.coordinates;
       var latLng = new google.maps.LatLng(coords[1],coords[0]);
-      var magnitude = list[i].properties.mag;
+      var magnitude = eqarray[i].properties.mag;
 
       var marker = new google.maps.Marker({
         position: latLng,
         map: map,
-        title: list[i].properties.title,
+        title: eqarray[i].properties.title,
 
         icon: getCircle(magnitude, '#fdd835'),
       });
-  
-  };
 
+      holderarray.push(marker);
 
-  //sample ajax to get the data from usgs appear on the map.
-  //merge the code with jasmine's version
-/*
-  $.ajax({
-
-    url: queryUrl,
-    method:"GET",
-
-
-  }).done(function(response){
-
-    //the following code needs to be adopted/merged with Jasmine's to ensure the proper earthquake display
-    eqArray = response.features;
-    console.log(eqArray);
-
-    for (var i = 0; i < eqArray.length; i++) {
-    
-      var coords = eqArray[i].geometry.coordinates;
-      var latLng = new google.maps.LatLng(coords[1],coords[0]);
-      var magnitude = eqArray[i].properties.mag;
-
-      var marker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-        title: eqArray[i].properties.title,
-
-        icon: getCircle(magnitude, '#fdd835'),
-      });
-   
-/*
-    google.maps.event.addListener(marker, "click", function(){
-
+      google.maps.event.addListener(marker, "click", function(){
       //this.setIcon(getCircle(magnitude, 'red'));
       map.setCenter(this.getPosition());
+      })
 
-    })
+    }
 
-    google.maps.event.addListener(marker, "mouseover", function(){
+};
 
-      this.setIcon(getCircle(this.getIcon().scale, 'red'));
-      //map.setCenter(this.getPosition());
+//function to remove marker
+function removeMarker(mkrarray) {
 
-    })
+  for (var i = 0; i < mkrarray.length; i++) {
 
+    mkrarray[i].setMap(null);
 
-    google.maps.event.addListener(marker, "mouseout", function(){
+  }
 
-      this.setIcon(getCircle(this.getIcon().scale, '#fdd835'));
-      //map.setCenter(this.getPosition());
-
-    })
-
-    };
-
-
-  
-    
-
-  });
-
- */   
-
-
-});
 }
