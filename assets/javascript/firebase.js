@@ -46,6 +46,6 @@ $("#feltIt").click(function(event){
 	var eqKey = $("#cardTitle").text() + $("eq-time").text();
 	//var location = getGeolocation();
 	var location = [0, 0];
-	pushUserDataToDb(title, location);
+	pushUserDataToDb(eqKey, location);
 });
 
