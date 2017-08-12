@@ -85,7 +85,6 @@
 
               <div id="shareBtn" class="btn clearfix waves-effect">Share</div>
 
-              <div class="fb-like"><button>Like</button></div>
             </div>
           </div>
         </div>
@@ -106,18 +105,29 @@
       })
 
       document.getElementById('shareBtn').onclick = function() {
-        var message = detail.properties.title;
+        var titleFB = detail.properties.title;
+        var timeFB = moment(detail.properties.time).format("YYYY/MM/DD HH:mm:ss");
+        var locationFB = lat+lng;
+        var magitudeFB = detail.properties.mag;
+        var depthFB = detail.geometry.coordinates[2];
+
+        console.log(titleFB);
+        console.log(timeFB);
+        console.log(locationFB);
+        console.log(magitudeFB);
+        console.log(depthFB);
+
           FB.ui({
-            method: 'feed',
-            link: 'https://natalieike.github.io/IFeltIt',
-            caption: message,
-            description: 'This is description',
+            method: 'share',
+            href: 'https://natalieike.github.io/IFeltIt',
+            caption: titleFB,
+            description: timeFB,
+            quote: locationFB,
           }, function(response){
-  
           });
       }
 
-      FB.XFBML.parse(document.getElementById('eq-time'));
+      
 
 
   </script>
