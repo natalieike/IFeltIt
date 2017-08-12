@@ -190,7 +190,3 @@ $("body").on('click','.collection-item',function(event){
 	});
     });
 
-  $('.info-card').show();
-  // });
-});
-
