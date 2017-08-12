@@ -1,3 +1,13 @@
+/*
+{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}
+*/
+
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyAYJEs1lKNyyY3F4DmNECBFKuUek-F4-FI",
@@ -20,10 +30,11 @@ function pushUserDataToDb(earthquakeKey, coordinates){
 	}
 	else if (pushResult == "Reference.push failed: first argument contains undefined in property '" + earthquakeKey + ".user'"){
 		console.log("creating earthquake in Db");
-		database.ref().push({
-			earthquake: earthquakeKey
+		database.ref().child(earthquakeKey).child(currentUser).push({
+			latitude: coordinates[0],
+			longitude: coordinates[1]
 		});
-		tryToPushToCorrectNode(earthquakeKey, coordinates);
+//		tryToPushToCorrectNode(earthquakeKey, coordinates);
 	}
 	else{
 		console.log(pushResult);
@@ -33,10 +44,7 @@ function pushUserDataToDb(earthquakeKey, coordinates){
 //Attempts to push straight to the earthquake node
 function tryToPushToCorrectNode (earthquakeKey, coordinates){
 	try {
-		database.ref(earthquakeKey).push({
-			user: currentUser
-		});
-		database.ref(userId).push({
+		database.ref(earthquakeKey).child(currentUser).push({
 			latitude: coordinates[0],
 			longitude: coordinates[1]
 		});
