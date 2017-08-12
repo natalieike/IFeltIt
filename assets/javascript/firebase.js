@@ -17,6 +17,9 @@ function pushUserDataToDb(earthquakeKey, coordinates){
 	if (pushResult === true){
 		return;
 	}
+	else if (pushResult === "Reference.push failed: first argument contains undefined in property " + earthquakeKey + ".user'"){
+		console.log("in the right place");
+	}
 	else{
 		console.log(pushResult);
 	}
