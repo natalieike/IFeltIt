@@ -74,6 +74,8 @@ function createMarker(eqarray, holderarray) {
         };
       }
 
+    var tempMarker;
+
     for (var i = 0; i < eqarray.length; i++) {
     
       var coords = eqarray[i].geometry.coordinates;
@@ -91,9 +93,37 @@ function createMarker(eqarray, holderarray) {
       holderarray.push(marker);
 
       google.maps.event.addListener(marker, "click", function(){
-      //this.setIcon(getCircle(magnitude, 'red'));
-      map.setCenter(this.getPosition());
-      })
+        //this.setIcon(getCircle(magnitude, 'red'));
+        map.setCenter(this.getPosition());
+        map.setZoom(6);
+
+      });
+
+      google.maps.event.addListener(marker, "mouseover", function(){
+
+        tempMarker = this.getIcon();
+        tempMarker.fillColor = 'red';
+        //tempMarker.fillOpacity = 0.75;
+        this.setIcon(tempMarker);
+        //map.setCenter(this.getPosition());
+        console.log("mouseover");
+        //this.setIcon()
+        //console.log(tempMarker);
+
+      });
+
+      google.maps.event.addListener(marker, "mouseout", function(){
+        tempMarker.fillColor = '#fdd835';
+        //tempMarker.fillOpacity = 0.5;
+         this.setIcon(tempMarker);
+        //map.setCenter(this.getPosition());
+        console.log("mouseout");
+
+        //console.log(this.getIcon());
+
+        //this.setIcon()
+
+      });
 
     }
 
