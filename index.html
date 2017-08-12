@@ -4,7 +4,8 @@
   <!--Let browser know website is optimized for mobile-->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<title>I Felt It!</title>
+
+  <title>I Felt It!</title>
 
   <!--Import Google Icon Font-->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -35,12 +36,15 @@
      
         <!-- LOGO -->
         <div id="logo"><a href="#" class="brand-logo"><img id="logo-img" src="assets/images/logo-3.png"></a></div>
+
+        <!-- FB LOGIN -->
         <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div>
 
         <div id="status"></div>
 
         <!-- LIST -->
         <p id="most-recent-eq">Most Recent Earthquakes</p>
+
         <!-- PAGINATION -->
          <ul class="pagination">
           <!-- <li class="disabled"><a href="#!"><i class=" material-icons">chevron_left</i></a></li>
@@ -63,9 +67,10 @@
       
       <!-- INFO CARD -->
       <div class="row info-card">
-        <div class="col s12 m5 offset-m7 l3 offset-l9">
+        <div class="">
           <div class="card white">
             <div class="card-content">
+              <a href="#"><i class="close small material-icons">clear</i></a>
               <!-- TITLE -->
               <span class="card-title" id="cardTitle">
                 <b>7km SE of Fairview, Oklahoma</b>
@@ -78,7 +83,9 @@
             </div>
             <!-- ACTION -->
             <div class="card-action">
-              <button class="btn yellow darken-1 waves-effect"><b>I Felt It!</b></button>
+              <button class="btn yellow darken-1 waves-effect black-text"><b>I Felt It!</b></button>
+
+              <div id="shareBtn" class="btn clearfix waves-effect">Share</div>
             </div>
           </div>
         </div>
@@ -86,14 +93,38 @@
       
       <div id="map"></div>
   
-
-
+<!-- Import Firebase -->
+<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAYJEs1lKNyyY3F4DmNECBFKuUek-F4-FI",
+    authDomain: "ifeltit-9ad52.firebaseapp.com",
+    databaseURL: "https://ifeltit-9ad52.firebaseio.com",
+    projectId: "ifeltit-9ad52",
+    storageBucket: "ifeltit-9ad52.appspot.com",
+    messagingSenderId: "855093901815"
+  };
+  firebase.initializeApp(config);
+</script>
   <!--Import jQuery and materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
 
   <script type="text/javascript">
-  
+      $(".button-collapse").sideNav();
+      $('.close').click(function(){
+        $('.info-card').hide();
+      })
+
+      document.getElementById('shareBtn').onclick = function() {
+        FB.ui({
+          method: 'share',
+          display: 'popup',
+          href: 'https://natalieike.github.io/IFeltIt',
+          quote: 'I Felt It!',
+        }, function(response){});
+      }
 
   </script>
 
