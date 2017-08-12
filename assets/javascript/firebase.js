@@ -15,10 +15,15 @@ var database = firebase.database(); //pointer to firebase database
 function pushUserDataToDb(earthquakeKey, coordinates){
 	var pushResult = tryToPushToCorrectNode(earthquakeKey, coordinates);
 	if (pushResult === true){
+		console.log("User Data in Db");
 		return;
 	}
 	else if (pushResult == "Reference.push failed: first argument contains undefined in property '" + earthquakeKey + ".user'"){
-		console.log("in the right place");
+		console.log("creating earthquake in Db");
+		database.ref().push({
+			earthquake: earthquakeKey
+		});
+		tryToPushToCorrectNode(earthquakeKey, coordinates);
 	}
 	else{
 		console.log(pushResult);
