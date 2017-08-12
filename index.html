@@ -107,7 +107,7 @@
       document.getElementById('shareBtn').onclick = function() {
         var titleFB = detail.properties.title;
         var timeFB = moment(detail.properties.time).format("YYYY/MM/DD HH:mm:ss");
-        var locationFB = lat+lng;
+        var locationFB = detail.geometry.coordinates[1] + detail.geometry.coordinates[0];
         var magitudeFB = detail.properties.mag;
         var depthFB = detail.geometry.coordinates[2];
 
