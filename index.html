@@ -106,12 +106,12 @@
 
       document.getElementById('shareBtn').onclick = function() {
         var titleFB = detail.properties.title;
-        var timeFB = moment(detail.properties.time).format("YYYY/MM/DD HH:mm:ss");
+        var timeFB = 'Time: ' + moment(detail.properties.time).format("YYYY/MM/DD HH:mm:ss");
         var lat = detail.geometry.coordinates[1];
         var lng = detail.geometry.coordinates[0];
-        var locationFB = lat + ', ' + lng;
-        var magitudeFB = detail.properties.mag;
-        var depthFB = detail.geometry.coordinates[2];
+        var locationFB = 'Location: ' + lat + ', ' + lng;
+        var magitudeFB = 'Magitude: ' + detail.properties.mag;
+        var depthFB = 'Depth: ' + detail.geometry.coordinates[2];
 
         console.log(titleFB);
         console.log(timeFB);
@@ -122,7 +122,13 @@
           FB.ui({
             method: 'share',
             href: 'https://natalieike.github.io/IFeltIt',
-            quote: 'I Felt It! <br>' + titleFB + '<br> Time: ' + timeFB + '<br> Location: ' + locationFB + '<br> Magitude: ' + magitudeFB + '<br> Depth: ' + depthFB,
+            // quote: 'I Felt It!' + titleFB + ', Time: ' + timeFB + '<br> Location: ' + locationFB + '<br> Magitude: ' + magitudeFB + '<br> Depth: ' + depthFB,
+            quote: 'I Felt It!',
+            quote: titleFB,
+            quote: timeFB,
+            quote: locationFB,
+            quote: magitudeFB,
+            quote: depthFB,
           }, function(response){
           });
       }
