@@ -84,6 +84,8 @@
               <button class="btn yellow darken-1 waves-effect black-text" id="feltIt"><b>I Felt It!</b></button>
 
               <div id="shareBtn" class="btn clearfix waves-effect">Share</div>
+
+              <div class="fb-like"><button>Like</button></div>
             </div>
           </div>
         </div>
@@ -103,22 +105,16 @@
         $('.info-card').hide();
       })
 
-      document.getElementById('shareBtn').onclick = function() {
-        FB.ui({
-          method: 'feed',
-          display: 'popup',
-          href: 'https://natalieike.github.io/IFeltIt',
-          quote: 'This is quote',
-          caption: 'This is caption',
-          name: 'This is name',
-          description: 'This is description',
-          message: 'This is message',
+      // document.getElementById('shareBtn').onclick = function() {
+      //     FB.ui({
+      //       method: 'feed',
+      //       link: 'https://natalieike.github.io/IFeltIt',
+      //       caption: 'This is caption',
+      //       description: 'This is description',
+      //     }, function(response){});
+      // }
 
-        }, function(response){
-
-        });
-      }
-
+      FB.XFBML.parse(document.getElementById('eq-time'));
 
 
   </script>
