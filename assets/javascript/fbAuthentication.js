@@ -91,7 +91,7 @@ var currentUser;
           console.log(errorMessage);
           console.log(credential);
         });
-        currentUser = firebaseUser.providerData.uid;
+        currentUser = firebaseUser.uid;
       } else {
           // User is already signed-in to Firebase with the correct user.
           console.log("Welcome Back");
