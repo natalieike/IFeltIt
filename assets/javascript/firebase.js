@@ -7,7 +7,6 @@
 }
 */
 
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyAYJEs1lKNyyY3F4DmNECBFKuUek-F4-FI",
@@ -20,6 +19,8 @@ var config = {
   firebase.initializeApp(config);
 
 var database = firebase.database(); //pointer to firebase database
+var currentUser = database.getAuth().uid;
+console.log("currentUser: " + currentUser);
 
 //Decision function to push the user data either straight to the earthquake node or create the node and push the user data to it
 function pushUserDataToDb(earthquakeKey, coordinates){
