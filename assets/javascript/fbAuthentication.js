@@ -1,3 +1,5 @@
+var currentUser;
+
 //Facebook SDK examples from:  https://developers.facebook.com/docs/facebook-login/web/
 	// This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
@@ -73,6 +75,7 @@
         var credential = firebase.auth.FacebookAuthProvider.credential(
             event.authResponse.accessToken);
         // Sign in with the credential from the Facebook user.
+        currentUser = firebaseUser.providerData.uid;
         firebase.auth().signInWithCredential(credential).catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
@@ -103,6 +106,7 @@ function isUserEqual(facebookAuthResponse, firebaseUser) {
       if (providerData[i].providerId === firebase.auth.FacebookAuthProvider.PROVIDER_ID &&
           providerData[i].uid === facebookAuthResponse.userID) {
         // We don't need to re-auth the Firebase connection.
+        currentUser = providerData.uid;
         return true;
       }
     }

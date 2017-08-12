@@ -3,6 +3,11 @@ var limit=10;
 var offset=1;
 var page=['<',1,2,3,4,5,'>'];
 var pageselected=1;
+var detail;
+
+//var to hold the markers for current page from Stanley
+var markerArray = [];
+
 $(document).ready(function(){
   $('.info-card').hide();
   loadList(limit,offset);
@@ -56,10 +61,18 @@ function loadList(limit,offset){
     $("#list-wrapper").append('<li class="collection-item avatar grey darken-4" data_info="'+i+'"><div class="circle yellow darken-1 black-text center"><span class="magnitude">'+list[i].properties.mag+'</span></div><p class="list-of-eq white-text">'+list[i].properties.title+'</p><p class="time-from-current">'+display+'</p></li>');
   }
 
+//start of code from Stanley to draw circle marker on Gmap
+createMarker(list,markerArray);
+//end of code from Stanley
+
 
 
 });
 };
+
+
+
+
 function loadPagination(onpage){
   $(".pagination").empty();
   console.log(onpage);
@@ -152,6 +165,11 @@ function loadPagination(onpage){
   }
   console.log(offset);
   loadList(limit,offset);
+  
+  //code from Stanley
+  removeMarker(markerArray); // this will remove the current marker on when pagination change
+  markerArray=[]; // reset markerArray so it doesnt grow bigger as user clicked more
+  //end of code from Stanley
  
 };
 $("body").on('click','.collection-item',function(event){
@@ -166,7 +184,7 @@ $("body").on('click','.collection-item',function(event){
 // }).done(function(response) {
   response=arr[v];
 	console.log(response);
-	var detail=arr[v];
+	detail=arr[v];
 	var lat=detail.geometry.coordinates[1];
 	if(lat<0){
 		lat=Math.abs(lat)+" °S";
