@@ -3,6 +3,10 @@ var limit=10;
 var offset=1;
 var page=['<',1,2,3,4,5,'>'];
 var pageselected=1;
+
+//var to hold the markers for current page from Stanley
+var markerArray = [];
+
 $(document).ready(function(){
   $('.info-card').hide();
   loadList(limit,offset);
@@ -57,10 +61,18 @@ function loadList(limit,offset){
 
   }
 
+//start of code from Stanley to draw circle marker on Gmap
+createMarker(list,markerArray);
+//end of code from Stanley
+
 
 
 });
 };
+
+
+
+
 function loadPagination(onpage){
   $(".pagination").empty();
   console.log(onpage);
@@ -153,6 +165,11 @@ function loadPagination(onpage){
   }
   console.log(offset);
   loadList(limit,offset);
+  
+  //code from Stanley
+  removeMarker(markerArray); // this will remove the current marker on when pagination change
+  markerArray=[]; // reset markerArray so it doesnt grow bigger as user clicked more
+  //end of code from Stanley
  
 };
 $("body").on('click','.collection-item',function(event){
