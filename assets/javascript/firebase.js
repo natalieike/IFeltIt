@@ -26,7 +26,7 @@ function pushUserDataToDb(earthquakeKey, coordinates){
 function tryToPushToCorrectNode (earthquakeKey, coordinates){
 	try {
 		database.ref(earthquakeKey).push({
-			user: currentUser.uid
+			user: currentUser
 		});
 		database.ref(userId).push({
 			latitude: coordinates[0],
