@@ -35,7 +35,7 @@ function tryToPushToCorrectNode (earthquakeKey, coordinates){
 		return true;	
 	}
 	catch(err){
-		return err.name;
+		return err.message;
 	}
 };
 
