@@ -44,6 +44,8 @@ function pushUserDataToDb(earthquakeKey, coordinates){
 //Attempts to push straight to the earthquake node
 function tryToPushToCorrectNode (earthquakeKey, coordinates){
 	try {
+		console.log("earthquakeKey: " + earthquakeKey);
+		console.log("currentUser: " + currentUser);
 		database.ref(earthquakeKey).child(currentUser).set({
 			latitude: coordinates[0],
 			longitude: coordinates[1]
