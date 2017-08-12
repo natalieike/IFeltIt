@@ -105,14 +105,17 @@
         $('.info-card').hide();
       })
 
-      // document.getElementById('shareBtn').onclick = function() {
-      //     FB.ui({
-      //       method: 'feed',
-      //       link: 'https://natalieike.github.io/IFeltIt',
-      //       caption: 'This is caption',
-      //       description: 'This is description',
-      //     }, function(response){});
-      // }
+      document.getElementById('shareBtn').onclick = function() {
+        var message = detail.properties.title;
+          FB.ui({
+            method: 'feed',
+            link: 'https://natalieike.github.io/IFeltIt',
+            caption: message,
+            description: 'This is description',
+          }, function(response){
+
+          });
+      }
 
       FB.XFBML.parse(document.getElementById('eq-time'));
 
