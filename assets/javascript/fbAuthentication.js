@@ -60,7 +60,7 @@ var currentUser;
   }
 
   //Event listener for Firebase login.  From Firebase documentation
-  FB.Event.subscribe('auth.authResponseChange', checkLoginState());
+  FB.Event.subscribe('auth.authResponseChange', checkLoginState(event));
 
 //Function to check Firebase login status and reconcile with Facebook login status.  From Firebase documentation.
   function checkLoginState(event) {
