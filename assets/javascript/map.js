@@ -100,7 +100,7 @@ function createMarker(eqarray, holderarray) {
         resetMarkerColor(holderarray);
 
         tempMarker = this.getIcon();
-        tempMarker.fillColor = 'white';
+        tempMarker.fillColor = '#40c4ff';
         //tempMarker.fillOpacity = 0.75;
         this.setIcon(tempMarker);
 
@@ -112,7 +112,7 @@ function createMarker(eqarray, holderarray) {
 
         tempMarker = this.getIcon();
 
-         if (tempMarker.fillColor === 'white') {
+         if (tempMarker.fillColor === '#40c4ff') {
 
           } else {
 
@@ -129,7 +129,7 @@ function createMarker(eqarray, holderarray) {
 
       google.maps.event.addListener(marker, "mouseout", function(){
 
-          if (tempMarker.fillColor === 'white') {
+          if (tempMarker.fillColor === '#40c4ff') {
 
           } else {
             tempMarker.fillColor = '#fdd835';
@@ -190,3 +190,16 @@ function removeMarker(mkrarray) {
 
   })
 
+//this will update list when user hover/click map
+function updateList(){
+
+
+
+}
+
+//this will update map when user hover/click on list
+function updateMap(){
+
+
+
+}
