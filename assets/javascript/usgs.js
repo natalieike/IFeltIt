@@ -3,6 +3,7 @@ var limit=10;
 var offset=1;
 var page=['<',1,2,3,4,5,'>'];
 var pageselected=1;
+var detail;
 
 //var to hold the markers for current page from Stanley
 var markerArray = [];
@@ -183,7 +184,7 @@ $("body").on('click','.collection-item',function(event){
 // }).done(function(response) {
   response=arr[v];
 	console.log(response);
-	var detail=arr[v];
+	detail=arr[v];
 	var lat=detail.geometry.coordinates[1];
 	if(lat<0){
 		lat=Math.abs(lat)+" °S";

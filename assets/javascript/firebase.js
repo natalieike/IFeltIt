@@ -43,7 +43,7 @@ function tryToPushToCorrectNode (earthquakeKey, coordinates){
 
 //Click Handler for I Felt It button
 $("#feltIt").click(function(event){
-	var eqKey = encodeURIComponent($("#cardTitle").text() + $("eq-time").text());
+	var eqKey = "lat" + detail.geometry.coordinates[1] + "long" + detail.geometry.coordinates[0] + "time" + detail.properties.time;
 	//var location = getGeolocation();
 	var location = [0, 0];
 	pushUserDataToDb(eqKey, location);
