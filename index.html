@@ -107,7 +107,9 @@
       document.getElementById('shareBtn').onclick = function() {
         var titleFB = detail.properties.title;
         var timeFB = moment(detail.properties.time).format("YYYY/MM/DD HH:mm:ss");
-        var locationFB = detail.geometry.coordinates[1] + detail.geometry.coordinates[0];
+        var lat = detail.geometry.coordinates[1];
+        var lng = detail.geometry.coordinates[0];
+        var locationFB = lat + ', ' + lng;
         var magitudeFB = detail.properties.mag;
         var depthFB = detail.geometry.coordinates[2];
 
@@ -120,15 +122,10 @@
           FB.ui({
             method: 'share',
             href: 'https://natalieike.github.io/IFeltIt',
-            caption: titleFB,
-            description: timeFB,
-            quote: locationFB,
+            quote: 'I Felt It! <br>' + titleFB + '<br> Time: ' + timeFB + '<br> Location: ' + locationFB + '<br> Magitude: ' + magitudeFB + '<br> Depth: ' + depthFB,
           }, function(response){
           });
       }
-
-      
-
 
   </script>
 
