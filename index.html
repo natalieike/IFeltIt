@@ -78,7 +78,7 @@
             </div>
             <!-- ACTION -->
             <div class="card-action">
-              <button class="btn yellow darken-1 waves-effect black-text"><b>I Felt It!</b></button>
+              <button class="btn yellow darken-1 waves-effect black-text" id="feltIt"><b>I Felt It!</b></button>
 
               <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large" data-mobile-iframe="false"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse">Share</a></div>
             </div>
@@ -90,18 +90,6 @@
   
 <!-- Import Firebase -->
 <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyAYJEs1lKNyyY3F4DmNECBFKuUek-F4-FI",
-    authDomain: "ifeltit-9ad52.firebaseapp.com",
-    databaseURL: "https://ifeltit-9ad52.firebaseio.com",
-    projectId: "ifeltit-9ad52",
-    storageBucket: "ifeltit-9ad52.appspot.com",
-    messagingSenderId: "855093901815"
-  };
-  firebase.initializeApp(config);
-</script>
   <!--Import jQuery and materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
@@ -114,10 +102,12 @@
 
   </script>
 
-	<script src="assets/javascript/map.js"></script>
+  <script src="assets/javascript/map.js"></script>
 
   <script src="assets/javascript/usgs.js"></script>
   <script src="assets/javascript/fbAuthentication.js"></script>
+  <!-- Firebase -->
+  <script src=assets/javascript/firebase.js></script>
 
 	<script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYG_rqJdj6LCL_MSarbLoyP7iSJ34w1L8&callback=initMap"></script>
