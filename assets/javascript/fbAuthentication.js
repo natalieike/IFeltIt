@@ -64,10 +64,9 @@ var currentUser;
 
 //Function to check Firebase login status and reconcile with Facebook login status.  From Firebase documentation.
   function checkLoginState(event) {
-        FB.getLoginStatus(function(response) {
+    FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
     });
-
   if (event.authResponse) {
     // User is signed-in to Facebook.
     var unsubscribe = firebase.auth().onAuthStateChanged(function(firebaseUser) {
@@ -79,7 +78,6 @@ var currentUser;
         var credential = firebase.auth.FacebookAuthProvider.credential(
             event.authResponse.accessToken);
         // Sign in with the credential from the Facebook user.
-        currentUser = firebaseUser.providerData.uid;
         firebase.auth().signInWithCredential(credential).catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
@@ -90,6 +88,7 @@ var currentUser;
           console.log(errorMessage);
           console.log(credential);
         });
+        currentUser = firebaseUser.providerData.uid;
       } else {
           // User is already signed-in to Firebase with the correct user.
           console.log("Welcome Back");
