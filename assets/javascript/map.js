@@ -97,11 +97,25 @@ function createMarker(eqarray, holderarray) {
         map.setCenter(this.getPosition());
         map.setZoom(6);
 
+        resetMarkerColor(holderarray);
+
+        tempMarker = this.getIcon();
+        tempMarker.fillColor = 'white';
+        //tempMarker.fillOpacity = 0.75;
+        this.setIcon(tempMarker);
+
+        //read data from the db and display data
+
       });
 
       google.maps.event.addListener(marker, "mouseover", function(){
 
         tempMarker = this.getIcon();
+
+         if (tempMarker.fillColor === 'white') {
+
+          } else {
+
         tempMarker.fillColor = 'red';
         //tempMarker.fillOpacity = 0.75;
         this.setIcon(tempMarker);
@@ -109,16 +123,21 @@ function createMarker(eqarray, holderarray) {
         console.log("mouseover");
         //this.setIcon()
         //console.log(tempMarker);
+      }
 
       });
 
       google.maps.event.addListener(marker, "mouseout", function(){
-        tempMarker.fillColor = '#fdd835';
-        //tempMarker.fillOpacity = 0.5;
-         this.setIcon(tempMarker);
-        //map.setCenter(this.getPosition());
-        console.log("mouseout");
 
+          if (tempMarker.fillColor === 'white') {
+
+          } else {
+            tempMarker.fillColor = '#fdd835';
+        //tempMarker.fillOpacity = 0.5;
+            this.setIcon(tempMarker);
+        //map.setCenter(this.getPosition());
+            console.log("mouseout");
+        }
         //console.log(this.getIcon());
 
         //this.setIcon()
@@ -139,3 +158,35 @@ function removeMarker(mkrarray) {
   }
 
 }
+
+
+  function resetMarkerColor(array){
+    
+    
+    
+    for (var i = 0; i< array.length; i++) {
+
+      var markerIconAttr = array[i].getIcon();
+      markerIconAttr.fillColor = '#fdd835';
+      array[i].setIcon(markerIconAttr);
+
+
+    }
+
+
+  };
+
+  $("body").on('mouseover','.collection-item',function(event){
+
+    $(this).children().eq(0).attr("class", "");
+    $(this).children().eq(0).attr("class", "circle red darken-1 black-text center")
+
+  })
+
+  $("body").on('mouseout','.collection-item',function(event){
+
+    $(this).children().eq(0).attr("class", "");
+    $(this).children().eq(0).attr("class", "circle yellow darken-1 black-text center")
+
+  })
+
