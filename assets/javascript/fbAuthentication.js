@@ -1,4 +1,4 @@
-var currentUser;
+//var currentUser;
 
 //Facebook SDK examples from:  https://developers.facebook.com/docs/facebook-login/web/
 	// This is called with the results from from FB.getLoginStatus().
@@ -91,7 +91,7 @@ var currentUser;
           console.log(errorMessage);
           console.log(credential);
         });
-        currentUser = firebaseUser.uid;
+//       currentUser = firebaseUser.uid;
       } else {
           // User is already signed-in to Firebase with the correct user.
           console.log("Welcome Back");
@@ -112,7 +112,7 @@ function isUserEqual(facebookAuthResponse, firebaseUser) {
       if (providerData[i].providerId === firebase.auth.FacebookAuthProvider.PROVIDER_ID &&
           providerData[i].uid === facebookAuthResponse.userID) {
         // We don't need to re-auth the Firebase connection.
-        currentUser = providerData.uid;
+//        currentUser = providerData.uid;
         return true;
       }
     }
