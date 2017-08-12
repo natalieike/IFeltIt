@@ -18,12 +18,12 @@ var currentUser;
   /* This function is called when someone finishes with the Login
   Button.  See the onlogin handler attached to it in the sample
   code below. */
-  function checkLoginState() {
+/*  function checkLoginState() {
     FB.getLoginStatus(function(response) {
       statusChangeCallback(response);
     });
   }
-
+*/
   window.fbAsyncInit = function() {
   FB.init({
     appId      : '159013001329609',
@@ -60,10 +60,14 @@ var currentUser;
   }
 
   //Event listener for Firebase login.  From Firebase documentation
-  FB.Event.subscribe('auth.authResponseChange', checkLoginState(event));
+  FB.Event.subscribe('auth.authResponseChange', checkLoginState);
 
 //Function to check Firebase login status and reconcile with Facebook login status.  From Firebase documentation.
   function checkLoginState(event) {
+        FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+
   if (event.authResponse) {
     // User is signed-in to Facebook.
     var unsubscribe = firebase.auth().onAuthStateChanged(function(firebaseUser) {
