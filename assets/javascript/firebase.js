@@ -19,7 +19,7 @@ var config = {
   firebase.initializeApp(config);
 
 var database = firebase.database(); //pointer to firebase database
-var currentUser = database.getAuth().uid;
+var currentUser = firebase.auth().currentUser;
 console.log("currentUser: " + currentUser);
 
 //Decision function to push the user data either straight to the earthquake node or create the node and push the user data to it
