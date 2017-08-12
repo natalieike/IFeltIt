@@ -46,6 +46,9 @@ var currentUser;
     statusChangeCallback(response);
   });
 
+  FB.Event.subscribe('auth.authResponseChange', checkLoginState);
+
+
   };
 
   /* Here we run a very simple test of the Graph API after login is
@@ -60,7 +63,7 @@ var currentUser;
   }
 
   //Event listener for Firebase login.  From Firebase documentation
-  FB.Event.subscribe('auth.authResponseChange', checkLoginState);
+//  FB.Event.subscribe('auth.authResponseChange', checkLoginState);
 
 //Function to check Firebase login status and reconcile with Facebook login status.  From Firebase documentation.
   function checkLoginState(event) {
