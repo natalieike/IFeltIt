@@ -11,37 +11,41 @@ var config = {
 
 var database = firebase.database(); //pointer to firebase database
 
-//Send all new earthquakes to Firebase
-function sendNewEqs(){
-	for var(i = 0; i < arr.length; i++){
-		var title = arr[i].properties.title;
-		database.ref(title).once('value').then(function(snapshot) {
-			if(snapshot.val() === null){
-				database.ref().push({
-					
-				})
-			}
-		});
+//Decision function to push the user data either straight to the earthquake node or create the node and push the user data to it
+function pushUserDataToDb(earthquakeKey, coordinates){
+	var pushResult = tryToPushToCorrectNode(earthquakeKey, coordinates);
+	if (pushResult === true){
+		return;
 	}
-}
+	else{
+		console.log(pushResult);
+	}
+};
 
-/*
+//Attempts to push straight to the earthquake node
+function tryToPushToCorrectNode (earthquakeKey, coordinates){
+	try {
+		database.ref(earthquakeKey).push({
+			user: currentUser.uid
+		});
+		database.ref(userId).push({
+			latitude: coordinates[0],
+			longitude: coordinates[1]
+		});
+		return true;	
+	}
+	catch(err){
+		return err.name;
+	}
+};
+
+
 
 //Click Handler for I Felt It button
 $("#feltIt").click(function(event){
-	var title = $("#cardTitle").text();
-	var time = $("#eq-time").text();
-	var location = $("#eq-location").text();
-	var magnitude = $("#eq-magnitude").text();
-	var depth = $("#eq-depth").text();
-
-	database.ref(title).push({
-		time: time,
-		location: location,
-		magnitude: magnitude,
-		depth: depth
-	});
-
+	var eqKey = $("#cardTitle").text() + $("eq-time").text();
+	//var location = getGeolocation();
+	var location = [0, 0];
+	pushUserDataToDb(title, location);
 });
 
-*/
