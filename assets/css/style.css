@@ -7,6 +7,7 @@
 
 .side-nav{
   width: 360px;
+  padding-bottom: 150px;
 }
 
 #list-wrapper{
@@ -15,24 +16,23 @@
 
 #most-recent-eq{
   font-weight: bold;
-  font-size: 13px;
+  font-size: 14px;
   color: #9e9e9e;
   margin-left: 5%;
   margin-top: 10%;
 }
 
 .list-of-eq{
-  font-weight: bold;
   color: white;
 }
 
 .time-from-current{
-  font-size: 12px;
+  font-size: 13px;
   color: #9e9e9e;
 }
 
 .circle{
-  font-size: 20px;
+  font-size: 16px;
   padding-top: 2.7%;
 }
 
@@ -53,6 +53,7 @@
   margin-top: 2%;
   margin-left: 2%;
   color: #212121;
+  z-index: 100;
 }
 
 .ham-menu:hover{
@@ -62,9 +63,10 @@
 .list-of-eq:hover{
   color: gray;
 }
+
 /*PAGINAITON*/
 .pagination{
-  margin-left: 6%;
+  margin-left: 1%;
 }
 
 .pagination li a{
@@ -85,11 +87,44 @@
   color: #fdd835;
 }
 
-<<<<<<< HEAD
-
 /*INFO CARD*/
 .info-card{
-position: ;
+position: fixed;
+z-index: 100;
+top:30px;
+right:30px;
+width: 430px;
+}
+
+.close{
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #bdbdbd;
+}
+
+.close:hover{
+ color: #212121; 
+}
+
+.card-title{
+  margin-right: 50px;
+  font-size: 10px;
+}
+
+/*FB BUTTON*/
+.fb-login-button{
+  margin: 4% 0 8px 6%;
+}
+
+#status{
+  margin-left: 6%;
+  color: #fff;
+}
+
+#shareBtn{
+  background-color: #314681;
+  margin-left: 5px;
 }
 
 /*MAP*/
@@ -103,14 +138,18 @@ html, body{
   padding: 0;
 };
 
-
-
-
-
-=======
 .fb-login-button{
   height: 30px;
   width: 100px;
-}
->>>>>>> 9972cc0cd92c72f57ff4f77899da0d91fe718265
+};
 
+
+#map {
+        height: 100%;
+      }
+      
+html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
