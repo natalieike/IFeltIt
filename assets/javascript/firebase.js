@@ -59,8 +59,11 @@ function tryToPushToCorrectNode (earthquakeKey, coordinates){
 function watchForNewData(){
 	var eqkey = calculateEqKey();
 	childCallback = database.ref(eqkey).on('child_added', function(snapshot){
+		var lat = snapshot.val().latitude;
+		var long = snapshot.val().longitude;
 		console.log("watching for new data");
-		console.log(snapshot.val());
+		console.log("lat: " + lat);
+		console.log("long: " + long);
 	});
 };
 
