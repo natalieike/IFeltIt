@@ -69,7 +69,7 @@ function watchForNewData(){
 		console.log("watching for new data");
 		console.log("lat: " + lat);
 		console.log("long: " + long);
-		plotdatapoint(lat, long);
+		plotDatapoint(lat, long);
 	});
 };
 
