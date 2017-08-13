@@ -32,7 +32,8 @@ function getGeolocation() {
 
 
 
-      plotDatapoint(lat,lng);
+
+//      plotdatapoint(lat,lng);
 
 
     }, function(error){
@@ -141,6 +142,9 @@ function createMarker(eqarray, holderarray) {
 
         //showDatapoint();
         //getGeolocation();
+
+        watchForNewData();
+
 
       });
 
@@ -357,6 +361,7 @@ function updateMap(string, state){
 
 //simple plot data point on gmap given lat and lng
 function plotDatapoint(latitude, longitude){
+
 
   var latLng = new google.maps.LatLng(latitude,longitude);
       
