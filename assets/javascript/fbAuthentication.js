@@ -12,8 +12,14 @@ var currentUser;
       // The person is not logged into your app or we are unable to tell.
       document.getElementById('status').innerHTML = 'Please log ' +
         'into this app.';
+      firebase.auth().signInAnonymously().catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log(errorCode + ": " + errorMessage);
+      });
     }
-  }
+  };
 
   /* This function is called when someone finishes with the Login
   Button.  See the onlogin handler attached to it in the sample
@@ -101,6 +107,12 @@ var currentUser;
     // User is signed-out of Facebook.
     firebase.auth().signOut();
     console.log("Goodbye");
+    firebase.auth().signInAnonymously().catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(errorCode + ": " + errorMessage);
+    });
   }
 };
 
