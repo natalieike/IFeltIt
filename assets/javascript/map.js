@@ -1,6 +1,3 @@
-var hasCoordinate = 0; 
-
-
 
 //request geolocation
 function getGeolocation() {
@@ -35,11 +32,12 @@ function getGeolocation() {
 
 
 
-      plotdatapoint(lat,lng);
+      plotDatapoint(lat,lng);
 
 
     }, function(error){
-      console.log(error);
+      //console.log(error);
+      showError(error);
     });
 
    
@@ -53,6 +51,22 @@ function getGeolocation() {
 
 }
 
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            console.log("User denied the request for Geolocation.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            console.log("Location information is unavailable.");
+            break;
+        case error.TIMEOUT:
+            console.log("The request to get user location timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            console.log("An unknown error occurred.");
+            break;
+    }
+}
 
 
 //Stanley's code for google map
@@ -73,12 +87,8 @@ function initMap() {
 
 };
 
-//takes an object array from the result of usga ajax call and use that data to generate markers on google map
+//takes an object array from the result of usgs ajax call and use that data to generate markers on google map
 function createMarker(eqarray, holderarray) {
-
-  // testing if plotdata works. The line below can be safely removed.
-    //plotdatapoint(25, 30);
-
 
       function getCircle(magnitude, color) {
         return {
@@ -114,8 +124,6 @@ function createMarker(eqarray, holderarray) {
       //add eventListener when user click on the marker on google map
       google.maps.event.addListener(marker, "click", function(){
 
-        //populatecard();
-
         map.setCenter(this.getPosition());
         map.setZoom(6);
 
@@ -131,21 +139,8 @@ function createMarker(eqarray, holderarray) {
 
         this.setIcon(tempMarker);
 
-        //read data from the db and display data
-        //read lat and long from getGeolocation and use it to plot on gMap
-        /*
-        var latCoord = getGeolocation()[0];
-        var longCoord = getGeolocation()[1];
-        console.log("lat:"+latCoord);
-        console.log("long:"+longCoord);
-*/
-
-
-       
-        //console.log(coord);
-        //plotdatapoint(coord[0],coord[1]);
-        getGeolocation();
-
+        //showDatapoint();
+        //getGeolocation();
 
       });
 
@@ -271,14 +266,7 @@ function updateList(string, state){
 
   var element = $("#list-wrapper").children();
 
-  //console.log(element);
-
-
   for(var i = 0; i < element.length; i++) {
-
-      //console.log("data_title is:" + element[i].firstChild.attributes[2].nodeValue);
-      //console.log("string is:" + string);
-      //console.log("data_clicked is:" + element[i].firstChild.attributes[1].nodeValue);
 
       if (element[i].firstChild.attributes[1].nodeValue === "n") {
 
@@ -367,7 +355,8 @@ function updateMap(string, state){
 
 }
 
-function plotdatapoint(latitude, longitude){
+//simple plot data point on gmap given lat and lng
+function plotDatapoint(latitude, longitude){
 
   var latLng = new google.maps.LatLng(latitude,longitude);
       
@@ -382,8 +371,17 @@ function plotdatapoint(latitude, longitude){
 }
 
 
+//when called, this function reads from firebase and plot all the data associated with the clicked earthquake
+function showDatapoint(){
+
+  console.log(database.ref());
 
 
+}
+
+
+
+//update teh info card based on whch marker on gmap user clicked
 function updateDetail(string){
 
   var element = $("#list-wrapper").children();
