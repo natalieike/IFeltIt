@@ -28,6 +28,9 @@ function getGeolocation() {
       positionArray.push(lat);
       positionArray.push(lng);
 
+      pushUserDataToDb(eqKey, location);
+
+
     });
 
     return positionArray;
