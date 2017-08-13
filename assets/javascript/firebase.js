@@ -10,7 +10,8 @@ var config = {
   firebase.initializeApp(config);
 
 var database = firebase.database(); //pointer to firebase database
-var childCallback; //Stores the reference to the .on child_added callback, so it can be removed later
+var childCallback = null; //Stores the reference to the .on child_added callback, so it can be removed later
+var watchedEq; //stores the key for the earthquake that has the data watcher attached to it
 
 //Calculates the database key for a specific earthquake
 function calculateEqKey(){
@@ -58,7 +59,11 @@ function tryToPushToCorrectNode (earthquakeKey, coordinates){
 //Function to attach a data handler to the selected earthquake. New I Felt It data points will be plotted to the map.
 function watchForNewData(){
 	var eqkey = calculateEqKey();
+	if(childCallback != null){
+		quitWatchingThisEarthquake();
+	}
 	childCallback = database.ref(eqkey).on('child_added', function(snapshot){
+		watchedEq = eqkey;
 		var lat = snapshot.val().latitude;
 		var long = snapshot.val().longitude;
 		console.log("watching for new data");
@@ -69,9 +74,8 @@ function watchForNewData(){
 
 //Function to detach a data handler when the user navigates away from an earthquake
 function quitWatchingThisEarthquake(){
-	var eqkey = calculateEqKey();
 	console.log("quit watching for new data");
-	database.ref(eqkey).off('child_added', childCallback);
+	database.ref(watchedEq).off('child_added', childCallback);
 };
 
 //Click Handler for I Felt It button
