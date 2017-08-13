@@ -31,7 +31,7 @@ function pushUserDataToDb(earthquakeKey, coordinates){
 	}
 	else if (pushResult == "Reference.push failed: first argument contains undefined in property '" + earthquakeKey + "'"){
 		console.log("creating earthquake in Db");
-		database.ref().child(earthquakeKey).child(currentUser).set({
+		database.ref().child(earthquakeKey).push({
 			latitude: coordinates[0],
 			longitude: coordinates[1]
 		});
