@@ -218,5 +218,7 @@ $("body").on('click','.collection-item',function(event){
 	$("#eq-depth").text(detail.geometry.coordinates[2]+" km");
 
 	$('.info-card').show();
+
+  watchForNewData();
     });
 
