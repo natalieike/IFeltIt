@@ -32,6 +32,8 @@ function getGeolocation() {
       pushUserDataToDb(eqKey, location);
 
 
+    }, function(error){
+      console.log(error);
     });
 
     return positionArray;
