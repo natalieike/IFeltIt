@@ -47,7 +47,7 @@ function getGeolocation() {
 
 }
 
-var test = getGeolocation();
+//var test = getGeolocation();
 
 //Stanley's code for google map
 var map;
