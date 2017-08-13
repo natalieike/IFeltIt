@@ -1,12 +1,3 @@
-/*
-{
-  "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null"
-  }
-}
-*/
-
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyAYJEs1lKNyyY3F4DmNECBFKuUek-F4-FI",
@@ -19,12 +10,16 @@ var config = {
   firebase.initializeApp(config);
 
 var database = firebase.database(); //pointer to firebase database
-//var currentUser = firebase.auth().currentUser;
-//console.log("currentUser: " + currentUser);
 
-//Decision function to push the user data either straight to the earthquake node or create the node and push the user data to it
+//Calculates the database key for a specific earthquake
+function calculateEqKey(){
+	var key = "lat" + Math.round(detail.geometry.coordinates[1]) + "long" + Math.round(detail.geometry.coordinates[0]) + "time" + detail.properties.time;
+	return key;
+}
+
+//Decision function to push the user data either straight to the earthquake node (if it exists) or create the node and push the user data to it
 function pushUserDataToDb(coordinates){
-	var eqKey = "lat" + Math.round(detail.geometry.coordinates[1]) + "long" + Math.round(detail.geometry.coordinates[0]) + "time" + detail.properties.time;
+	var eqKey = calculateEqKey();
 	var pushResult = tryToPushToCorrectNode(eqKey, coordinates);
 	if (pushResult === true){
 		console.log("User Data in Db");
@@ -36,14 +31,13 @@ function pushUserDataToDb(coordinates){
 			latitude: coordinates[0],
 			longitude: coordinates[1]
 		});
-//		tryToPushToCorrectNode(earthquakeKey, coordinates);
 	}
 	else{
 		console.log(pushResult);
 	}
 };
 
-//Attempts to push straight to the earthquake node
+//Attempts to push straight to the earthquake node.  If it fails, an error message is returned
 function tryToPushToCorrectNode (earthquakeKey, coordinates){
 	try {
 		console.log("earthquakeKey: " + earthquakeKey);
@@ -60,13 +54,15 @@ function tryToPushToCorrectNode (earthquakeKey, coordinates){
 	}
 };
 
+//Function to attach a data handler to the selected earthquake. New I Felt It data points will be plotted to the map.
+function watchForNewData(){
+	var eqkey = calculateEqKey();
+};
 
 
 //Click Handler for I Felt It button
 $("#feltIt").click(function(event){
-//	var eqKey = "lat" + Math.round(detail.geometry.coordinates[1]) + "long" + Math.round(detail.geometry.coordinates[0]) + "time" + detail.properties.time;
 	var location = getGeolocation();
 	console.log(location);
-//	pushUserDataToDb(eqKey, location);
 });
 
