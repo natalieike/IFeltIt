@@ -29,14 +29,14 @@ function getGeolocation() {
       positionArray.push(lat);
       positionArray.push(lng);
 
-//      pushUserDataToDb(eqKey, location);
+      pushUserDataToDb(positionArray);
 
-    return positionArray;
 
     }, function(error){
       console.log(error);
     });
 
+    return positionArray;
 
   } else {
   /* geolocation IS NOT available */

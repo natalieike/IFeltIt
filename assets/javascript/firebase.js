@@ -23,8 +23,9 @@ var database = firebase.database(); //pointer to firebase database
 //console.log("currentUser: " + currentUser);
 
 //Decision function to push the user data either straight to the earthquake node or create the node and push the user data to it
-function pushUserDataToDb(earthquakeKey, coordinates){
-	var pushResult = tryToPushToCorrectNode(earthquakeKey, coordinates);
+function pushUserDataToDb(coordinates){
+	var eqKey = "lat" + Math.round(detail.geometry.coordinates[1]) + "long" + Math.round(detail.geometry.coordinates[0]) + "time" + detail.properties.time;
+	var pushResult = tryToPushToCorrectNode(eqKey, coordinates);
 	if (pushResult === true){
 		console.log("User Data in Db");
 		return;
@@ -63,9 +64,9 @@ function tryToPushToCorrectNode (earthquakeKey, coordinates){
 
 //Click Handler for I Felt It button
 $("#feltIt").click(function(event){
-	var eqKey = "lat" + Math.round(detail.geometry.coordinates[1]) + "long" + Math.round(detail.geometry.coordinates[0]) + "time" + detail.properties.time;
+//	var eqKey = "lat" + Math.round(detail.geometry.coordinates[1]) + "long" + Math.round(detail.geometry.coordinates[0]) + "time" + detail.properties.time;
 	var location = getGeolocation();
 	console.log(location);
-	pushUserDataToDb(eqKey, location);
+//	pushUserDataToDb(eqKey, location);
 });
 
