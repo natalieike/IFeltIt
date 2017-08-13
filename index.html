@@ -102,6 +102,8 @@
       $(".button-collapse").sideNav();
       $('.close').click(function(){
         $('.info-card').hide();
+        //remove data watcher that plots uer data points
+        quitWatchingThisEarthquake();
       })
 
       document.getElementById('shareBtn').onclick = function() {

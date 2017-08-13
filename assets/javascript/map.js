@@ -8,6 +8,7 @@ function getGeolocation() {
     var positionArray = [];
 
     navigator.geolocation.getCurrentPosition(function(position){
+      console.log("in function");
 
       var lat = position.coords.latitude;
       var lng = position.coords.longitude;
@@ -18,9 +19,11 @@ function getGeolocation() {
       positionArray.push(lat);
       positionArray.push(lng);
 
-      pushUserDataToDb(eqKey, location);
+      pushUserDataToDb(positionArray);
 
 
+    }, function(error){
+      console.log(error);
     });
 
     return positionArray;
@@ -34,7 +37,7 @@ function getGeolocation() {
 
 }
 
-var test = getGeolocation();
+//var test = getGeolocation();
 
 //Stanley's code for google map
 var map;
