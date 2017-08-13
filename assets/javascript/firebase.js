@@ -77,6 +77,8 @@ function watchForNewData(){
 function quitWatchingThisEarthquake(){
 	console.log("quit watching for new data");
 	database.ref(watchedEq).off('child_added', childCallback);
+	watchedEQ = null;
+	childCallback = null;
 };
 
 //Click Handler for I Felt It button
