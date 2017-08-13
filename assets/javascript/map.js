@@ -1,45 +1,51 @@
-/* replace/merge the following with Jasmine's code */
+var hasCoordinate = 0; 
 
-//sample query URL to test getting data onto map
-//var queryUrl = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&offset=1"
 
-//"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2017-08-01&endtime=2017-08-05&limit=10";
-
-//var to hold the returned ajax
-//var eqArray = [];
 
 //request geolocation
 function getGeolocation() {
 
+
+
   if (navigator.geolocation != null) {
-  /* geolocation is available */
     console.log("geo yes!");
 
+    
+
+
+
     var positionArray = [];
+    var lat;
+    var lng;
 
     navigator.geolocation.getCurrentPosition(function(position){
       console.log("in function");
 
-      var lat = position.coords.latitude;
-      var lng = position.coords.longitude;
+      lat = position.coords.latitude;
+      lng = position.coords.longitude;
 
       console.log("lat is:" + position.coords.latitude);
-      console.log("lat is:" + position.coords.longitude);
+      console.log("lng is:" + position.coords.longitude);
 
       positionArray.push(lat);
       positionArray.push(lng);
 
+
       pushUserDataToDb(positionArray);
+
+
+
+      plotdatapoint(lat,lng);
 
 
     }, function(error){
       console.log(error);
     });
 
-    return positionArray;
+   
 
   } else {
-  /* geolocation IS NOT available */
+
   console.log("geo no!");
   
   }
@@ -47,7 +53,7 @@ function getGeolocation() {
 
 }
 
-//var test = getGeolocation();
+
 
 //Stanley's code for google map
 var map;
@@ -67,7 +73,12 @@ function initMap() {
 
 };
 
+//takes an object array from the result of usga ajax call and use that data to generate markers on google map
 function createMarker(eqarray, holderarray) {
+
+  // testing if plotdata works. The line below can be safely removed.
+    //plotdatapoint(25, 30);
+
 
       function getCircle(magnitude, color) {
         return {
@@ -81,6 +92,7 @@ function createMarker(eqarray, holderarray) {
       }
 
     var tempMarker;
+    var tempTitle;
 
     for (var i = 0; i < eqarray.length; i++) {
     
@@ -96,57 +108,80 @@ function createMarker(eqarray, holderarray) {
         icon: getCircle(magnitude, '#fdd835'),
       });
 
+      //push each marker into an array for later use
       holderarray.push(marker);
 
+      //add eventListener when user click on the marker on google map
       google.maps.event.addListener(marker, "click", function(){
-        //this.setIcon(getCircle(magnitude, 'red'));
+
+        //populatecard();
+
         map.setCenter(this.getPosition());
         map.setZoom(6);
 
         resetMarkerColor(holderarray);
 
         tempMarker = this.getIcon();
+        tempTitle = this.title;
         tempMarker.fillColor = '#40c4ff';
-        //tempMarker.fillOpacity = 0.75;
+
+        resetClicked();
+        setClicked(tempTitle);
+        updateDetail(tempTitle);
+
         this.setIcon(tempMarker);
 
         //read data from the db and display data
+        //read lat and long from getGeolocation and use it to plot on gMap
+        /*
+        var latCoord = getGeolocation()[0];
+        var longCoord = getGeolocation()[1];
+        console.log("lat:"+latCoord);
+        console.log("long:"+longCoord);
+*/
+
+
+       
+        //console.log(coord);
+        //plotdatapoint(coord[0],coord[1]);
+        getGeolocation();
+
 
       });
 
+      //add eventListner to marker when mouse hover over the marker
       google.maps.event.addListener(marker, "mouseover", function(){
 
         tempMarker = this.getIcon();
+        tempTitle = this.title;
 
          if (tempMarker.fillColor === '#40c4ff') {
 
           } else {
 
-        tempMarker.fillColor = 'red';
-        //tempMarker.fillOpacity = 0.75;
+        tempMarker.fillColor = '#f9a825';
+
         this.setIcon(tempMarker);
-        //map.setCenter(this.getPosition());
-        console.log("mouseover");
-        //this.setIcon()
-        //console.log(tempMarker);
+
+        updateList(tempTitle,"mouseover");
       }
 
       });
 
+      //add evenListener to marker when mouse move out of the marker
       google.maps.event.addListener(marker, "mouseout", function(){
 
           if (tempMarker.fillColor === '#40c4ff') {
 
           } else {
             tempMarker.fillColor = '#fdd835';
-        //tempMarker.fillOpacity = 0.5;
-            this.setIcon(tempMarker);
-        //map.setCenter(this.getPosition());
-            console.log("mouseout");
-        }
-        //console.log(this.getIcon());
 
-        //this.setIcon()
+            this.setIcon(tempMarker);
+
+            //console.log("mouseout");
+
+            updateList(tempTitle,"mouseout");
+        }
 
       });
 
@@ -165,7 +200,7 @@ function removeMarker(mkrarray) {
 
 }
 
-
+//function to reset marker color
   function resetMarkerColor(array){
     
     
@@ -182,30 +217,218 @@ function removeMarker(mkrarray) {
 
   };
 
+//add event to the list on the left hand side, when mouseover
   $("body").on('mouseover','.collection-item',function(event){
 
+    if ($(this).children().eq(0).attr("data_clicked") === "n") {
     $(this).children().eq(0).attr("class", "");
-    $(this).children().eq(0).attr("class", "circle red darken-1 black-text center")
+    $(this).children().eq(0).attr("class", "circle yellow darken-3 black-text center");
+
+
+
+    var hoverOver = $(this).children().eq(0).attr("data_title");
+
+    updateMap(hoverOver,"mouseover");
+
+    }
 
   })
 
+//add event to the lsit on the left hand side when mouseout
   $("body").on('mouseout','.collection-item',function(event){
-
+if ($(this).children().eq(0).attr("data_clicked") === "n") {
     $(this).children().eq(0).attr("class", "");
-    $(this).children().eq(0).attr("class", "circle yellow darken-1 black-text center")
+    $(this).children().eq(0).attr("class", "circle yellow darken-1 black-text center");
+
+    var hoverOver = $(this).children().eq(0).attr("data_title");
+
+    updateMap(hoverOver,"mouseout");
+  }
 
   })
 
-//this will update list when user hover/click map
-function updateList(){
+//add event when user click on the list on the left hnd side
+    $("body").on('click','.collection-item',function(event){
+
+        resetMarkerColor(markerArray);
+        resetClicked();
+
+        $(this).children().eq(0).attr("class","circle light-blue accent-2 black-text center");
+        $(this).children().eq(0).attr("data_clicked", "y");
+
+        var listNum=$(this).attr("data_info");
+
+        var clickedMarkerIconAttr = markerArray[listNum].getIcon();
+        clickedMarkerIconAttr.fillColor = "#40c4ff";
+        markerArray[listNum].setIcon(clickedMarkerIconAttr);
+        map.setCenter(markerArray[listNum].getPosition());
+        map.setZoom(6);
+
+  })
+
+//this will update list on the left hand side when user mouse over/mouse out on marker on google map
+function updateList(string, state){
+
+  var element = $("#list-wrapper").children();
+
+  //console.log(element);
+
+
+  for(var i = 0; i < element.length; i++) {
+
+      //console.log("data_title is:" + element[i].firstChild.attributes[2].nodeValue);
+      //console.log("string is:" + string);
+      //console.log("data_clicked is:" + element[i].firstChild.attributes[1].nodeValue);
+
+      if (element[i].firstChild.attributes[1].nodeValue === "n") {
+
+        if (element[i].firstChild.attributes[2].nodeValue === string && state === "mouseover") {
+
+          element[i].firstChild.classList.value = "circle yellow darken-3 black-text center";
+        }
+
+        if (element[i].firstChild.attributes[2].nodeValue === string && state === "mouseout") {
+
+          element[i].firstChild.classList.value = "circle yellow darken-1 black-text center";
+        }
+
+      } 
+  }
+  
+
+
+}
+
+//set clicked data state, data_clicked="y" means this element is selected, "n" otherwise
+function setClicked(string) {
+
+  var element = $("#list-wrapper").children();
+
+  for (var i = 0; i < element.length; i++) {
+
+    if (element[i].firstChild.attributes[2].nodeValue === string) {
+
+      element[i].firstChild.attributes[1].nodeValue = "y";
+      element[i].firstChild.classList.value = "circle light-blue accent-2 black-text center";
+
+    }
+
+
+  }
+
+
+}
+
+//reset all data_clicked to "n"
+function resetClicked() {
+
+  var element = $("#list-wrapper").children();
+
+  for (var i = 0; i < element.length; i++) {
+
+
+      element[i].firstChild.attributes[1].nodeValue = "n";
+      element[i].firstChild.classList.value = "circle yellow darken-1 black-text center";
+
+
+
+  }
+
+
+}
+
+//this will update map when user mouse over/mouse out on items on list
+function updateMap(string, state){
+
+  for (var i = 0; i < markerArray.length; i++) {
+
+    if (markerArray[i].title === string && state === "mouseover") {
+
+      var markerHolder = markerArray[i].getIcon();
+
+      markerHolder.fillColor = "#f9a825";
+      markerArray[i].setIcon(markerHolder);
+
+    } 
+
+    if (markerArray[i].title === string && state === "mouseout") {
+
+      var markerHolder = markerArray[i].getIcon();
+
+      markerHolder.fillColor = "#fdd835";
+      markerArray[i].setIcon(markerHolder);
+
+    }
+
+
+  }
 
 
 
 }
 
-//this will update map when user hover/click on list
-function updateMap(){
+function plotdatapoint(latitude, longitude){
+
+  var latLng = new google.maps.LatLng(latitude,longitude);
+      
+
+  var marker = new google.maps.Marker({
+      
+        position: latLng,
+        map: map,
+      
+      });
+
+}
+
+
+
+
+function updateDetail(string){
+
+  var element = $("#list-wrapper").children();
+
+  console.log(element);
+  console.log(string);
+
+  for (var i = 0; i < element.length; i++) {
+
+    if (element[i].firstChild.attributes[2].nodeValue === string) {
+
+      detail=arr[i];
+      console.log(detail);
+
+      var lat=detail.geometry.coordinates[1];
+
+  if(lat<0){
+    lat=Math.abs(lat)+" °S";
+  }
+  else{
+    lat=lat+" °N";
+  }
+  var lng=detail.geometry.coordinates[0];
+  if(lng<0){
+    lng=Math.abs(lng)+" °W";
+  }
+  else{
+    lng=lng+" °E";
+  }
+  $("#cardTitle").text(detail.properties.title);
+  $("#eq-time").text(moment(detail.properties.time).format("YYYY/MM/DD HH:mm:ss"));
+  $("#eq-location").text(lat+", "+lng);
+  $("#eq-magitude").text(detail.properties.mag);
+  $("#eq-depth").text(detail.geometry.coordinates[2]+" km");
+
+  $('.info-card').show();
+
+  watchForNewData();
+
+    }
+
+
+  }
 
 
 
 }
+
