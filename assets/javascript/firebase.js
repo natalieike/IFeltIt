@@ -64,6 +64,7 @@ function tryToPushToCorrectNode (earthquakeKey, coordinates){
 $("#feltIt").click(function(event){
 	var eqKey = "lat" + Math.round(detail.geometry.coordinates[1]) + "long" + Math.round(detail.geometry.coordinates[0]) + "time" + detail.properties.time;
 	var location = getGeolocation();
+	console.log(location);
 	pushUserDataToDb(eqKey, location);
 });
 
