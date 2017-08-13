@@ -35,7 +35,7 @@ function getGeolocation() {
 
 
 
-      plotdatapoint(lat,lng);
+//      plotdatapoint(lat,lng);
 
 
     }, function(error){
@@ -144,8 +144,8 @@ function createMarker(eqarray, holderarray) {
        
         //console.log(coord);
         //plotdatapoint(coord[0],coord[1]);
-        getGeolocation();
-
+//        getGeolocation();
+        watchForNewData();
 
       });
 
