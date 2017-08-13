@@ -47,6 +47,7 @@ function tryToPushToCorrectNode (earthquakeKey, coordinates){
 	try {
 		console.log("earthquakeKey: " + earthquakeKey);
 		console.log("currentUser: " + currentUser);
+		console.log("coordinates: " + coordinates);
 		database.ref(earthquakeKey).push({
 			latitude: coordinates[0],
 			longitude: coordinates[1]
