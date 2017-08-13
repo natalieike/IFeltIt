@@ -18,6 +18,7 @@ function getGeolocation() {
     var positionArray = [];
 
     navigator.geolocation.getCurrentPosition(function(position){
+      console.log("in function");
 
       var lat = position.coords.latitude;
       var lng = position.coords.longitude;
