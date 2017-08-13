@@ -368,7 +368,8 @@ function updateMap(string, state){
 }
 
 function plotdatapoint(latitude, longitude){
-
+  console.log("plotdatapoint");
+  console.log(latitude + " " + longitude);
   var latLng = new google.maps.LatLng(latitude,longitude);
       
 
