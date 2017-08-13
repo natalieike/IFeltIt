@@ -1,35 +1,51 @@
+var hasCoordinate = 0; 
+
+
+
 //request geolocation
 function getGeolocation() {
 
+
+
   if (navigator.geolocation != null) {
-  /* geolocation is available */
     console.log("geo yes!");
 
+    
+
+
+
     var positionArray = [];
+    var lat;
+    var lng;
 
     navigator.geolocation.getCurrentPosition(function(position){
       console.log("in function");
 
-      var lat = position.coords.latitude;
-      var lng = position.coords.longitude;
+      lat = position.coords.latitude;
+      lng = position.coords.longitude;
 
       console.log("lat is:" + position.coords.latitude);
-      console.log("lat is:" + position.coords.longitude);
+      console.log("lng is:" + position.coords.longitude);
 
       positionArray.push(lat);
       positionArray.push(lng);
 
+
       pushUserDataToDb(positionArray);
+
+
+
+      plotdatapoint(lat,lng);
 
 
     }, function(error){
       console.log(error);
     });
 
-    return positionArray;
+   
 
   } else {
-  /* geolocation IS NOT available */
+
   console.log("geo no!");
   
   }
@@ -37,7 +53,7 @@ function getGeolocation() {
 
 }
 
-//var test = getGeolocation();
+
 
 //Stanley's code for google map
 var map;
@@ -59,6 +75,10 @@ function initMap() {
 
 //takes an object array from the result of usga ajax call and use that data to generate markers on google map
 function createMarker(eqarray, holderarray) {
+
+  // testing if plotdata works. The line below can be safely removed.
+    //plotdatapoint(25, 30);
+
 
       function getCircle(magnitude, color) {
         return {
@@ -94,6 +114,8 @@ function createMarker(eqarray, holderarray) {
       //add eventListener when user click on the marker on google map
       google.maps.event.addListener(marker, "click", function(){
 
+        //populatecard();
+
         map.setCenter(this.getPosition());
         map.setZoom(6);
 
@@ -105,10 +127,24 @@ function createMarker(eqarray, holderarray) {
 
         resetClicked();
         setClicked(tempTitle);
+        updateDetail(tempTitle);
 
         this.setIcon(tempMarker);
 
         //read data from the db and display data
+        //read lat and long from getGeolocation and use it to plot on gMap
+        /*
+        var latCoord = getGeolocation()[0];
+        var longCoord = getGeolocation()[1];
+        console.log("lat:"+latCoord);
+        console.log("long:"+longCoord);
+*/
+
+
+       
+        //console.log(coord);
+        //plotdatapoint(coord[0],coord[1]);
+        getGeolocation();
 
 
       });
@@ -330,3 +366,69 @@ function updateMap(string, state){
 
 
 }
+
+function plotdatapoint(latitude, longitude){
+
+  var latLng = new google.maps.LatLng(latitude,longitude);
+      
+
+  var marker = new google.maps.Marker({
+      
+        position: latLng,
+        map: map,
+      
+      });
+
+}
+
+
+
+
+function updateDetail(string){
+
+  var element = $("#list-wrapper").children();
+
+  console.log(element);
+  console.log(string);
+
+  for (var i = 0; i < element.length; i++) {
+
+    if (element[i].firstChild.attributes[2].nodeValue === string) {
+
+      detail=arr[i];
+      console.log(detail);
+
+      var lat=detail.geometry.coordinates[1];
+
+  if(lat<0){
+    lat=Math.abs(lat)+" °S";
+  }
+  else{
+    lat=lat+" °N";
+  }
+  var lng=detail.geometry.coordinates[0];
+  if(lng<0){
+    lng=Math.abs(lng)+" °W";
+  }
+  else{
+    lng=lng+" °E";
+  }
+  $("#cardTitle").text(detail.properties.title);
+  $("#eq-time").text(moment(detail.properties.time).format("YYYY/MM/DD HH:mm:ss"));
+  $("#eq-location").text(lat+", "+lng);
+  $("#eq-magitude").text(detail.properties.mag);
+  $("#eq-depth").text(detail.geometry.coordinates[2]+" km");
+
+  $('.info-card').show();
+
+  watchForNewData();
+
+    }
+
+
+  }
+
+
+
+}
+
