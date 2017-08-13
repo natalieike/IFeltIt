@@ -57,8 +57,8 @@ function loadList(limit,offset){
   //console.log(duration.asMinutes());
 
     //var timeRemaining=moment.diff(list[i].properties.time)
-
-    $("#list-wrapper").append('<li class="collection-item avatar grey darken-4" data_info="'+i+'"><div id="magcircle" class="circle yellow darken-1 black-text center"><span class="magnitude">'+list[i].properties.mag+'</span></div><p class="list-of-eq white-text">'+list[i].properties.title+'</p><p class="time-from-current">'+display+'</p></li>');
+    //add data-title attribute
+    $("#list-wrapper").append('<li class="collection-item avatar grey darken-4" data_info="'+i+'"><div class="circle yellow darken-1 black-text center" data_clicked="n" data_title="'+list[i].properties.title+'"><span class="magnitude">'+list[i].properties.mag+'</span></div><p class="list-of-eq white-text">'+list[i].properties.title+'</p><p class="time-from-current">'+display+'</p></li>');
   }
 
 //start of code from Stanley to draw circle marker on Gmap
@@ -187,16 +187,6 @@ $("body").on('click','.collection-item',function(event){
 	console.log(response);
 	detail=arr[v];
 	var lat=detail.geometry.coordinates[1];
-
-  //code from Stanley
-
-
-  resetMarkerColor(markerArray);
-
-  var clickedMarkerIconAttr = markerArray[v].getIcon();
-  clickedMarkerIconAttr.fillColor = "white";
-  markerArray[v].setIcon(clickedMarkerIconAttr);
-  //end code from Stanley
 
 	if(lat<0){
 		lat=Math.abs(lat)+" °S";

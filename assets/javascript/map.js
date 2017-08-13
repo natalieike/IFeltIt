@@ -1,13 +1,3 @@
-/* replace/merge the following with Jasmine's code */
-
-//sample query URL to test getting data onto map
-//var queryUrl = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&limit=10&offset=1"
-
-//"https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2017-08-01&endtime=2017-08-05&limit=10";
-
-//var to hold the returned ajax
-//var eqArray = [];
-
 //request geolocation
 function getGeolocation() {
 
@@ -64,6 +54,7 @@ function initMap() {
 
 };
 
+//takes an object array from the result of usga ajax call and use that data to generate markers on google map
 function createMarker(eqarray, holderarray) {
 
       function getCircle(magnitude, color) {
@@ -78,6 +69,7 @@ function createMarker(eqarray, holderarray) {
       }
 
     var tempMarker;
+    var tempTitle;
 
     for (var i = 0; i < eqarray.length; i++) {
     
@@ -93,57 +85,64 @@ function createMarker(eqarray, holderarray) {
         icon: getCircle(magnitude, '#fdd835'),
       });
 
+      //push each marker into an array for later use
       holderarray.push(marker);
 
+      //add eventListener when user click on the marker on google map
       google.maps.event.addListener(marker, "click", function(){
-        //this.setIcon(getCircle(magnitude, 'red'));
+
         map.setCenter(this.getPosition());
         map.setZoom(6);
 
         resetMarkerColor(holderarray);
 
         tempMarker = this.getIcon();
+        tempTitle = this.title;
         tempMarker.fillColor = '#40c4ff';
-        //tempMarker.fillOpacity = 0.75;
+
+        resetClicked();
+        setClicked(tempTitle);
+
         this.setIcon(tempMarker);
 
         //read data from the db and display data
 
+
       });
 
+      //add eventListner to marker when mouse hover over the marker
       google.maps.event.addListener(marker, "mouseover", function(){
 
         tempMarker = this.getIcon();
+        tempTitle = this.title;
 
          if (tempMarker.fillColor === '#40c4ff') {
 
           } else {
 
-        tempMarker.fillColor = 'red';
-        //tempMarker.fillOpacity = 0.75;
+        tempMarker.fillColor = '#f9a825';
+
         this.setIcon(tempMarker);
-        //map.setCenter(this.getPosition());
-        console.log("mouseover");
-        //this.setIcon()
-        //console.log(tempMarker);
+
+        updateList(tempTitle,"mouseover");
       }
 
       });
 
+      //add evenListener to marker when mouse move out of the marker
       google.maps.event.addListener(marker, "mouseout", function(){
 
           if (tempMarker.fillColor === '#40c4ff') {
 
           } else {
             tempMarker.fillColor = '#fdd835';
-        //tempMarker.fillOpacity = 0.5;
-            this.setIcon(tempMarker);
-        //map.setCenter(this.getPosition());
-            console.log("mouseout");
-        }
-        //console.log(this.getIcon());
 
-        //this.setIcon()
+            this.setIcon(tempMarker);
+
+            //console.log("mouseout");
+
+            updateList(tempTitle,"mouseout");
+        }
 
       });
 
@@ -162,7 +161,7 @@ function removeMarker(mkrarray) {
 
 }
 
-
+//function to reset marker color
   function resetMarkerColor(array){
     
     
@@ -179,29 +178,151 @@ function removeMarker(mkrarray) {
 
   };
 
+//add event to the list on the left hand side, when mouseover
   $("body").on('mouseover','.collection-item',function(event){
 
+    if ($(this).children().eq(0).attr("data_clicked") === "n") {
     $(this).children().eq(0).attr("class", "");
-    $(this).children().eq(0).attr("class", "circle red darken-1 black-text center")
+    $(this).children().eq(0).attr("class", "circle yellow darken-3 black-text center");
+
+
+
+    var hoverOver = $(this).children().eq(0).attr("data_title");
+
+    updateMap(hoverOver,"mouseover");
+
+    }
 
   })
 
+//add event to the lsit on the left hand side when mouseout
   $("body").on('mouseout','.collection-item',function(event){
-
+if ($(this).children().eq(0).attr("data_clicked") === "n") {
     $(this).children().eq(0).attr("class", "");
-    $(this).children().eq(0).attr("class", "circle yellow darken-1 black-text center")
+    $(this).children().eq(0).attr("class", "circle yellow darken-1 black-text center");
+
+    var hoverOver = $(this).children().eq(0).attr("data_title");
+
+    updateMap(hoverOver,"mouseout");
+  }
 
   })
 
-//this will update list when user hover/click map
-function updateList(){
+//add event when user click on the list on the left hnd side
+    $("body").on('click','.collection-item',function(event){
 
+        resetMarkerColor(markerArray);
+        resetClicked();
+
+        $(this).children().eq(0).attr("class","circle light-blue accent-2 black-text center");
+        $(this).children().eq(0).attr("data_clicked", "y");
+
+        var listNum=$(this).attr("data_info");
+
+        var clickedMarkerIconAttr = markerArray[listNum].getIcon();
+        clickedMarkerIconAttr.fillColor = "#40c4ff";
+        markerArray[listNum].setIcon(clickedMarkerIconAttr);
+        map.setCenter(markerArray[listNum].getPosition());
+        map.setZoom(6);
+
+  })
+
+//this will update list on the left hand side when user mouse over/mouse out on marker on google map
+function updateList(string, state){
+
+  var element = $("#list-wrapper").children();
+
+  //console.log(element);
+
+
+  for(var i = 0; i < element.length; i++) {
+
+      //console.log("data_title is:" + element[i].firstChild.attributes[2].nodeValue);
+      //console.log("string is:" + string);
+      //console.log("data_clicked is:" + element[i].firstChild.attributes[1].nodeValue);
+
+      if (element[i].firstChild.attributes[1].nodeValue === "n") {
+
+        if (element[i].firstChild.attributes[2].nodeValue === string && state === "mouseover") {
+
+          element[i].firstChild.classList.value = "circle yellow darken-3 black-text center";
+        }
+
+        if (element[i].firstChild.attributes[2].nodeValue === string && state === "mouseout") {
+
+          element[i].firstChild.classList.value = "circle yellow darken-1 black-text center";
+        }
+
+      } 
+  }
+  
 
 
 }
 
-//this will update map when user hover/click on list
-function updateMap(){
+//set clicked data state, data_clicked="y" means this element is selected, "n" otherwise
+function setClicked(string) {
+
+  var element = $("#list-wrapper").children();
+
+  for (var i = 0; i < element.length; i++) {
+
+    if (element[i].firstChild.attributes[2].nodeValue === string) {
+
+      element[i].firstChild.attributes[1].nodeValue = "y";
+      element[i].firstChild.classList.value = "circle light-blue accent-2 black-text center";
+
+    }
+
+
+  }
+
+
+}
+
+//reset all data_clicked to "n"
+function resetClicked() {
+
+  var element = $("#list-wrapper").children();
+
+  for (var i = 0; i < element.length; i++) {
+
+
+      element[i].firstChild.attributes[1].nodeValue = "n";
+      element[i].firstChild.classList.value = "circle yellow darken-1 black-text center";
+
+
+
+  }
+
+
+}
+
+//this will update map when user mouse over/mouse out on items on list
+function updateMap(string, state){
+
+  for (var i = 0; i < markerArray.length; i++) {
+
+    if (markerArray[i].title === string && state === "mouseover") {
+
+      var markerHolder = markerArray[i].getIcon();
+
+      markerHolder.fillColor = "#f9a825";
+      markerArray[i].setIcon(markerHolder);
+
+    } 
+
+    if (markerArray[i].title === string && state === "mouseout") {
+
+      var markerHolder = markerArray[i].getIcon();
+
+      markerHolder.fillColor = "#fdd835";
+      markerArray[i].setIcon(markerHolder);
+
+    }
+
+
+  }
 
 
 
