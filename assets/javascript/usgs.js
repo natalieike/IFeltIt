@@ -175,6 +175,7 @@ function loadPagination(onpage){
 $("body").on('click','.collection-item',function(event){
       // var time = $
       // $('.info-card').show();
+      getGeolocation();
       var v=$(this).attr("data_info");
       v=parseInt(v);
       console.log(v,offset);
