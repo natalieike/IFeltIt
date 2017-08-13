@@ -60,7 +60,7 @@ function watchForNewData(){
 	var eqkey = calculateEqKey();
 	childCallback = database.ref(eqkey).on('child_added', function(snapshot){
 		console.log("watching for new data");
-		console.log(snapshot);
+		console.log(snapshot.val());
 	});
 };
 
