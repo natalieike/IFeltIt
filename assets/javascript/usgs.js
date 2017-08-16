@@ -79,33 +79,33 @@ function loadPagination(onpage){
   if(onpage < 3){
     page=['<',1,2,3,4,5,'>'];
     $(".pagination").append('<li class="disabled"><a href="#!">'+page[0]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[1]+')>'+page[1]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[2]+')>'+page[2]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[3]+')>'+page[3]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[4]+')>'+page[4]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[5]+')>'+page[5]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[6]+')>'+page[6]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[1]+')">'+page[1]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[2]+')">'+page[2]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[3]+')">'+page[3]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[4]+')">'+page[4]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[5]+')">'+page[5]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[6]+')">'+page[6]+'</a></li>');
 
   }
   else if(onpage > 2000){
     page=['<',1996,1997,1998,1999,2000,'>'];
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[0]+')>'+page[0]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[1]+')>'+page[1]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[2]+')>'+page[2]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[3]+')>'+page[3]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[4]+')>'+page[4]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[5]+')>'+page[5]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[0]+')">'+page[0]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[1]+')">'+page[1]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[2]+')">'+page[2]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[3]+')">'+page[3]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[4]+')">'+page[4]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[5]+')">'+page[5]+'</a></li>');
     $(".pagination").append('<li class="disabled"><a href="#!">'+page[6]+'</a></li>');
   }
   else{
     page=['<',onpage-2,onpage-1,onpage,onpage+1,onpage+2,'>'];
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[0]+')>'+page[0]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[1]+')>'+page[1]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[2]+')>'+page[2]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[3]+')>'+page[3]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[4]+')>'+page[4]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[5]+')>'+page[5]+'</a></li>');
-    $(".pagination").append('<li class=""><a href="#!" onclick=update('+page[6]+')>'+page[6]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[0]+')">'+page[0]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[1]+')">'+page[1]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[2]+')">'+page[2]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[3]+')">'+page[3]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[4]+')">'+page[4]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[5]+')">'+page[5]+'</a></li>');
+    $(".pagination").append('<li class=""><a href="#!" onclick="update('+page[6]+')">'+page[6]+'</a></li>');
 
   }
 
