@@ -7,7 +7,7 @@ var config = {
     storageBucket: "ifeltit-9ad52.appspot.com",
     messagingSenderId: "855093901815"
   };
-  firebase.initializeApp(config);
+firebase.initializeApp(config);
 
 var database = firebase.database(); //pointer to firebase database
 var childCallback = null; //Stores the reference to the .on child_added callback, so it can be removed later
@@ -24,11 +24,9 @@ function pushUserDataToDb(coordinates){
 	var eqKey = calculateEqKey();
 	var pushResult = tryToPushToCorrectNode(eqKey, coordinates);
 	if (pushResult === true){
-		console.log("User Data in Db");
 		return;
 	}
 	else if (pushResult == "Reference.push failed: first argument contains undefined in property '" + earthquakeKey + "'"){
-		console.log("creating earthquake in Db");
 		database.ref().child(earthquakeKey).push({
 			latitude: coordinates[0],
 			longitude: coordinates[1]
@@ -42,8 +40,6 @@ function pushUserDataToDb(coordinates){
 //Attempts to push straight to the earthquake node.  If it fails, an error message is returned
 function tryToPushToCorrectNode (earthquakeKey, coordinates){
 	try {
-		console.log("earthquakeKey: " + earthquakeKey);
-		console.log("coordinates: " + coordinates);
 		database.ref(earthquakeKey).push({
 			latitude: coordinates[0],
 			longitude: coordinates[1]
@@ -65,16 +61,12 @@ function watchForNewData(){
 		watchedEq = eqkey;
 		var lat = snapshot.val().latitude;
 		var long = snapshot.val().longitude;
-		console.log("watching for new data");
-		console.log("lat: " + lat);
-		console.log("long: " + long);
 		plotDatapoint(lat, long);
 	});
 };
 
 //Function to detach a data handler when the user navigates away from an earthquake
 function quitWatchingThisEarthquake(){
-	console.log("quit watching for new data");
 	database.ref(watchedEq).off('child_added', childCallback);
 	watchedEQ = null;
 	childCallback = null;
@@ -83,6 +75,5 @@ function quitWatchingThisEarthquake(){
 //Click Handler for I Felt It button
 $("#feltIt").click(function(event){
 	var location = getGeolocation();
-	console.log(location);
 });
 
