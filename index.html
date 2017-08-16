@@ -17,9 +17,9 @@
 </head>
 <body>
 	<!-- Code from Facebook - Loads Facebook SDK - this needs to go at the top of the body tag. 
-			 The following snippet of code will give the basic version of the SDK where the options are set to their most common defaults.  -->
-       <!-- add comment -->
-	<div id="fb-root"></div>
+  The following snippet of code will give the basic version of the SDK where the options are set to their most common defaults.  -->
+  <!-- add comment -->
+  <div id="fb-root"></div>
   <script>
     (function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -31,22 +31,22 @@
   </script>
 
 
-      <!-- SIDE NAV -->
-      <ul id="slide-out" class="collection side-nav fixed grey darken-4 z">
-     
-        <!-- LOGO -->
-        <div id="logo"><a href="#" class="brand-logo"><img id="logo-img" src="assets/images/logo-3.png"></a></div>
+  <!-- SIDE NAV -->
+  <ul id="slide-out" class="collection side-nav fixed grey darken-4 z">
 
-        <!-- FB LOGIN -->
-        <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div>
+    <!-- LOGO -->
+    <div id="logo"><a href="#" class="brand-logo"><img id="logo-img" src="assets/images/logo-3.png"></a></div>
 
-        <div id="status"></div>
+    <!-- FB LOGIN -->
+    <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></div>
 
-        <!-- LIST -->
-        <p id="most-recent-eq">Most Recent Earthquakes</p>
+    <div id="status"></div>
 
-        <!-- PAGINATION -->
-         <ul class="pagination">
+    <!-- LIST -->
+    <p id="most-recent-eq">Most Recent Earthquakes</p>
+
+    <!-- PAGINATION -->
+    <ul class="pagination">
          <!-- <li class="disabled"><a href="#!"><i class=" material-icons">chevron_left</i></a></li>
 
           <li class="active"><a href="#">1</a></li>
@@ -91,35 +91,35 @@
       </div> <!-- ./info-card -->
       
       <div id="map"></div>
-  
-<!-- Import Firebase -->
-<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
-  <!--Import jQuery and materialize.js-->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
 
-  <script type="text/javascript">
-      $(".button-collapse").sideNav();
-      $('.close').click(function(){
-        $('.info-card').hide();
+      <!-- Import Firebase -->
+      <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+      <!--Import jQuery and materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+
+      <script type="text/javascript">
+        $(".button-collapse").sideNav();
+        $('.close').click(function(){
+          $('.info-card').hide();
         //remove data watcher that plots uer data points
         quitWatchingThisEarthquake();
       })
 
-      document.getElementById('shareBtn').onclick = function() {
-        var titleFB = detail.properties.title;
-        var timeFB = 'Time: ' + moment(detail.properties.time).format("YYYY/MM/DD HH:mm:ss");
-        var lat = detail.geometry.coordinates[1];
-        var lng = detail.geometry.coordinates[0];
-        var locationFB = 'Location: ' + lat + ', ' + lng;
-        var magitudeFB = 'Magitude: ' + detail.properties.mag;
-        var depthFB = 'Depth: ' + detail.geometry.coordinates[2];
+        document.getElementById('shareBtn').onclick = function() {
+          var titleFB = detail.properties.title;
+          var timeFB = 'Time: ' + moment(detail.properties.time).format("YYYY/MM/DD HH:mm:ss");
+          var lat = detail.geometry.coordinates[1];
+          var lng = detail.geometry.coordinates[0];
+          var locationFB = 'Location: ' + lat + ', ' + lng;
+          var magitudeFB = 'Magitude: ' + detail.properties.mag;
+          var depthFB = 'Depth: ' + detail.geometry.coordinates[2];
 
-        console.log(titleFB);
-        console.log(timeFB);
-        console.log(locationFB);
-        console.log(magitudeFB);
-        console.log(depthFB);
+          console.log(titleFB);
+          console.log(timeFB);
+          console.log(locationFB);
+          console.log(magitudeFB);
+          console.log(depthFB);
 
           FB.ui({
             method: 'share',
@@ -130,20 +130,20 @@
           });
 
 
-      }
+        }
 
-  </script>
+      </script>
 
-  <!-- Firebase -->
-  <script src="assets/javascript/firebase.js"></script>
+      <!-- Firebase -->
+      <script src="assets/javascript/firebase.js"></script>
 
-  <script src="assets/javascript/map.js"></script>
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYG_rqJdj6LCL_MSarbLoyP7iSJ34w1L8&callback=initMap"></script>
-  <script src="assets/javascript/usgs.js"></script>
-  <script src="assets/javascript/fbAuthentication.js"></script>
-  
+      <script src="assets/javascript/map.js"></script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYG_rqJdj6LCL_MSarbLoyP7iSJ34w1L8&callback=initMap"></script>
+      <script src="assets/javascript/usgs.js"></script>
+      <script src="assets/javascript/fbAuthentication.js"></script>
 
-	
-</body>
-</html>
+
+
+    </body>
+    </html>
